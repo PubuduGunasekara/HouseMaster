@@ -5,16 +5,18 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.housemaster.databinding.FragmentBookAppointmentBinding
 import com.example.housemaster.databinding.FragmentHomeBinding
+import com.example.housemaster.databinding.FragmentIndividualCategoryBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
 
-    private lateinit var homeBinding: FragmentHomeBinding
+    private lateinit var bookAppointmentBinding: FragmentBookAppointmentBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        homeBinding = FragmentHomeBinding.bind(view)
+        bookAppointmentBinding = FragmentBookAppointmentBinding.bind(view)
 
         //this is just to hide ActionBar from the fragment
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
@@ -22,7 +24,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav)
         view.visibility = View.VISIBLE
 
-        homeBinding.buttonLogin.setOnClickListener {
+        bookAppointmentBinding.btnCheckout.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
             findNavController().navigate(action)
         }
