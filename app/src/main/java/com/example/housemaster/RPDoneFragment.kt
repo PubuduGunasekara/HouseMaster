@@ -1,5 +1,6 @@
 package com.example.housemaster
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -26,9 +27,9 @@ class RPDoneFragment : Fragment(R.layout.fragment_rp_done) {
         view.visibility = View.GONE
 
 
-        rpDoneBinding.btnRpDoneSignIn.setOnClickListener {
-            val action =
-                RPDoneFragmentDirections.actionRPDoneFragmentToSignInFragment()
+        //navigate to forgot sign in
+        rpDoneBinding.btnFPDmoveSignIn.setOnClickListener {
+            val action = RPDoneFragmentDirections.actionRPDoneFragmentToSignInFragment()
             findNavController().navigate(action)
         }
 

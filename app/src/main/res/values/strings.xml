@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">HouseMaster</string>
+
+    <string name="emailSignIn">Email</string>
+    <string name="passwordSignIn">Password</string>
+    <string name="btnSignIn">Sign In</string>
+    <string name="cpasswordSignIn">Confirm Password</string>
+    <string name="btnSignUp">Sign Up</string>
+    <string name="cpasswordSignUp">Confirm Password</string>
+    <string name="passwordSignUp">Password</string>
+    <string name="emailSignUp">Email</string>
+    <string name="emailForgotPassword">Enter your email</string>
+    <string name="btnSendEmail">Send Reset Link</string>
+    <string name="btnFPDMoveSignIn">Sign In</string>
+    <string name="forgot_password_string">Forgot Password?</string>
+    <string name="btn_create_an_account">Create an Account</string>
 </resources>
