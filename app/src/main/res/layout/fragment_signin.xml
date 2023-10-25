@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/emailSignIn"
 
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -51,14 +51,16 @@
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp">
+            app:boxCornerRadiusTopStart="10dp"
+            app:counterMaxLength="15"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/signin_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/passwordSignIn"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -128,38 +130,3 @@
 
 
 </LinearLayout>
-
-    <!--<?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="16dp"
-        tools:context=".SignInFragment">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign In Screen"
-            android:textSize="30sp" />
-
-        <Button
-            android:id="@+id/btn_sign_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign In" />
-
-        <Button
-            android:id="@+id/btn_sign_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign Up" />
-
-        <Button
-            android:id="@+id/btn_reset_pw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Reset Password" />
-    </LinearLayout>-->

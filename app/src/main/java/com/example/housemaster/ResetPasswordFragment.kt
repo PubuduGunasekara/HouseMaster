@@ -3,6 +3,7 @@ package com.example.housemaster
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.housemaster.databinding.FragmentResetPasswordBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -33,29 +35,56 @@ class ResetPasswordFragment : Fragment(R.layout.fragment_reset_password) {
 
         resetPasswordBinding.btnSendEmail.setOnClickListener {
             val email = resetPasswordBinding.forgotPwEmail.text.toString()
-            if (email.isNotEmpty()) {
+            if (validateEmail()) {
 
 
                 firebaseAuth.sendPasswordResetEmail(email)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            val action =
-                                ResetPasswordFragmentDirections.actionResetPasswordFragmentToRPDoneFragment()
-                            findNavController().navigate(action)
+                            MaterialAlertDialogBuilder(requireContext()).setTitle("Success")
+                                .setMessage("Reset link has been sent to the email entered successfully.")
+                                .setCancelable(false)
+                                .setPositiveButton("Done") { dialog_, which ->
+
+                                    val action =
+                                        ResetPasswordFragmentDirections.actionResetPasswordFragmentToSignInFragment()
+                                    findNavController().navigate(action)
+
+
+                                }.show()
                         } else {
                             Toast.makeText(
                                 requireContext(),
-                                "Error sending the link, Please try again later",
+                                task.exception?.message.toString(),
                                 Toast.LENGTH_LONG
                             ).show()
                         }
                     }
             } else {
-                Toast.makeText(requireContext(), "Empty fields are not allowed", Toast.LENGTH_LONG).show()
+                validateEmail()
             }
 
         }
 
 
+    }
+
+
+    private fun validateEmail(): Boolean {
+        var errorMessage: String? = null
+        val value: String = resetPasswordBinding.forgotPwEmail.text.toString()
+        if (value.isEmpty()) {
+            errorMessage = "Email is required"
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
+            errorMessage = "Invalid Email Address"
+        }
+
+        if (errorMessage != null) {
+            resetPasswordBinding.forgotEmailTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+        return errorMessage == null
     }
 }

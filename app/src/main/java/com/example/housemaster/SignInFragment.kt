@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.housemaster.databinding.FragmentSigninBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import java.lang.Exception
 
@@ -51,17 +52,15 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
                                 SignInFragmentDirections.actionSignInFragmentToHomeFragment()
                             findNavController().navigate(action)
                         } else {
-                            /*signInBinding.firebaseErrorTil.apply {
-                                isErrorEnabled = true
-                                if (it.exception?.message.toString() == "ERROR_INVALID_CREDENTIAL")
-                                    error = "INVALID LOGIN CREDENTIAL";
-                            }*/
-                            Toast.makeText(
-                                requireContext(),
-                                "" + it.exception?.message.toString(),
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
+                            MaterialAlertDialogBuilder(requireContext()).setTitle("Sign In Error")
+                                .setCancelable(false)
+                                .setMessage(it.exception?.message.toString())
+                                .setPositiveButton("Done") { dialog_, which ->
+                                    false
+
+
+                                }.show()
+
                         }
                     }
 
@@ -94,6 +93,10 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
         view.visibility = View.GONE
 
 
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     //validate Email

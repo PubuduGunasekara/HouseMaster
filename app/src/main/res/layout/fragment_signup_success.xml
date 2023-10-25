@@ -3,20 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="40dp"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".SignUpSuccessFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/signup_move_to_signinp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up Success"
-        android:textSize="30sp" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
 
-    <Button
+        android:text="You have successfully registered to the HouseMaster servce!"
+        android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_done"
-        android:layout_width="wrap_content"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_btn"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="Done" />
 </LinearLayout>

@@ -14,4 +14,11 @@
     <string name="btnFPDMoveSignIn">Sign In</string>
     <string name="forgot_password_string">Forgot Password?</string>
     <string name="btn_create_an_account">Create an Account</string>
+    <string name="fNameSignUp">First Name</string>
+    <string name="lNameSignUp">Last Name</string>
+    <string name="btnSignInInstead">Sign In Instead</string>
+    <string name="already_have_an_account_sign_in_instead">Already have an account? Sign In instead</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_edit">Edit Profile</string>
 </resources>

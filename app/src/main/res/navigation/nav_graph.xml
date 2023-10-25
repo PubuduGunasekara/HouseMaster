@@ -108,9 +108,10 @@
         android:name="com.example.housemaster.ResetPasswordFragment"
         android:label="fragment_resetpassword"
         tools:layout="@layout/fragment_reset_password" >
+        <action android:id="@+id/action_resetPasswordFragment_to_RPDoneFragment" />
         <action
-            android:id="@+id/action_resetPasswordFragment_to_RPDoneFragment"
-            app:destination="@id/RPDoneFragment" />
+            android:id="@+id/action_resetPasswordFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpSuccessFragment"
@@ -180,4 +181,22 @@
         android:name="com.example.housemaster.AppointmentSuccessFragment"
         android:label="fragment_appointment_success"
         tools:layout="@layout/fragment_appointment_success" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.housemaster.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile">
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.housemaster.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
 </navigation>
