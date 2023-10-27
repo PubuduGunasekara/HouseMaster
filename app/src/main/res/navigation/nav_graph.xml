@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_homeFragment_to_serviceItemFragment"
             app:destination="@id/serviceItemFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -189,6 +192,9 @@
         <action
             android:id="@+id/action_editProfileFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileChangePasswordFragment"
+            app:destination="@id/profileChangePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -199,4 +205,19 @@
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileChangePasswordFragment"
+        android:name="com.example.housemaster.ProfileChangePasswordFragment"
+        android:label="fragment_profile_change_password"
+        tools:layout="@layout/fragment_profile_change_password" >
+        <action
+            android:id="@+id/action_profileChangePasswordFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileChangePasswordFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_signInFragment"
+        app:destination="@id/signInFragment" />
 </navigation>

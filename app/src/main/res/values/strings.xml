@@ -21,4 +21,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile_edit">Edit Profile</string>
+    <string name="btneProfile">Save Changes</string>
+    <string name="phoneEProfile">Phone Number</string>
+    <string name="eProfileAddress1">Address Line 1</string>
+    <string name="eProfileAddress2">Address Line 2</string>
+    <string name="eProfile_changePassword">Change your password</string>
+    <string name="eProfile_changeImage">Change Image</string>
+    <string name="btnepChangePW">Change Password</string>
+    <string name="epCurrentPassword">Current Password</string>
+    <string name="ep_new_password">New Password</string>
+    <string name="ep_new_password_con">Confirm Password</string>
 </resources>
