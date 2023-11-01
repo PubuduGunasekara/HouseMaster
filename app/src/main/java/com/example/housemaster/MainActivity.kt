@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.findNavController()
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment, R.id.searchFragment, R.id.signOut),
+            setOf(R.id.homeFragment, R.id.searchFragment, R.id.signOut, R.id.listCardsFragment),
             mainBinding.drawerLayout
         )
 
@@ -48,7 +48,9 @@ class MainActivity : AppCompatActivity() {
 
         mainBinding.bottomNav.setupWithNavController(navController)
         mainBinding.navView.setupWithNavController(navController)
-        mainBinding.navView.setNavigationItemSelectedListener {
+
+
+       /* mainBinding.navView.setNavigationItemSelectedListener {
             val id = it.itemId
 
 
@@ -67,10 +69,21 @@ class MainActivity : AppCompatActivity() {
 
 
                     }.show()
+            } else if (id == R.id.homeFragment) {
+                val action = NavGraphDirections.actionGlobalHomeFragment()
+                navController.navigate(action)
+
+            } else if (id == R.id.searchFragment) {
+                val action = NavGraphDirections.actionGlobalSearchFragment()
+                navController.navigate(action)
+
+            } else if (id == R.id.listCardsFragment) {
+                val action = NavGraphDirections.actionGlobalListCardsFragment()
+                navController.navigate(action)
             }
 
             return@setNavigationItemSelectedListener true
-        }
+        }*/
 
 
     }

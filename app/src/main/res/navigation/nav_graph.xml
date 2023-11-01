@@ -220,4 +220,22 @@
     <action
         android:id="@+id/action_global_signInFragment"
         app:destination="@id/signInFragment" />
+    <fragment
+        android:id="@+id/addCardsAndAccountsFragment"
+        android:name="com.example.housemaster.AddCardsAndAccountsFragment"
+        android:label="fragment_add_cards_and_accounts"
+        tools:layout="@layout/fragment_add_cards_and_accounts" >
+        <action
+            android:id="@+id/action_addCardsAndAccountsFragment_to_listCardsFragment"
+            app:destination="@id/listCardsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listCardsFragment"
+        android:name="com.example.housemaster.ListCardsFragment"
+        android:label="Cards and Accounts"
+        tools:layout="@layout/fragment_list_cards">
+        <action
+            android:id="@+id/action_listCardsFragment_to_addCardsAndAccountsFragment"
+            app:destination="@id/addCardsAndAccountsFragment" />
+    </fragment><action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment"/><action android:id="@+id/action_global_listCardsFragment" app:destination="@id/listCardsFragment"/><action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment"/>
 </navigation>

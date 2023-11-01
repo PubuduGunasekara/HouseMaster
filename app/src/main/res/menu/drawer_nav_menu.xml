@@ -12,5 +12,10 @@
         android:id="@+id/signOut"
         android:icon="@drawable/baseline_logout_24"
         android:title="Sign Out" />
+    <item
+        android:id="@+id/listCardsFragment"
+        android:icon="@drawable/baseline_credit_card_24"
+        android:title="Payments" />
+
 
 </menu>
