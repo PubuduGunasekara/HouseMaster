@@ -2,9 +2,12 @@ package com.example.housemaster
 
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.housemaster.databinding.FragmentHomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -13,6 +16,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var homeBinding: FragmentHomeBinding
     private lateinit var firebaseAuth: FirebaseAuth
+
+    private lateinit var categoryRecyclerView: RecyclerView
+    private lateinit var categoryArrayList: ArrayList<ServiceCategoryModel>
+    lateinit var categoryTitle: Array<String>
+    lateinit var categoryImage: Array<Int>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         firebaseAuth = FirebaseAuth.getInstance()
         if (firebaseAuth.currentUser == null) {
@@ -21,7 +29,66 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         super.onViewCreated(view, savedInstanceState)
         homeBinding = FragmentHomeBinding.bind(view)
+//adapter implementation
 
+        categoryTitle = arrayOf(
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+        )
+
+        categoryImage = arrayOf(
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+
+            R.drawable.logo_house_master,
+            R.drawable.sample_saloon,
+            R.drawable.logo_house_master,
+            R.drawable.sample_saloon,
+            R.drawable.logo_house_master,
+            R.drawable.sample_saloon,
+            R.drawable.logo_house_master,
+            R.drawable.sample_saloon,
+        )
+
+        categoryRecyclerView = homeBinding.homeCategoryRV
+        categoryRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        categoryRecyclerView.setHasFixedSize(true)
+
+        categoryArrayList = arrayListOf<ServiceCategoryModel>()
+        getCategoryData()
+
+        categoryRecyclerView.adapter = ServiceCategoryAdapter(categoryArrayList)
+//end of adapter implementation
 
         //this is just to hide ActionBar from the fragment
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
@@ -35,5 +102,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
 
+    }
+
+    private fun getCategoryData() {
+        for (i in categoryTitle.indices) {
+            val title = ServiceCategoryModel(categoryTitle[i], categoryImage[i])
+            categoryArrayList.add(title)
+        }
     }
 }
