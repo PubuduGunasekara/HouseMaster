@@ -21,6 +21,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var categoryArrayList: ArrayList<ServiceCategoryModel>
     lateinit var categoryTitle: Array<String>
     lateinit var categoryImage: Array<Int>
+
+    private lateinit var spRecyclerView: RecyclerView
+    private lateinit var spArrayList: ArrayList<ServiceProviderModel>
+    lateinit var spName: Array<String>
+    lateinit var spImage: Array<Int>
+    lateinit var spRatings: Array<String>
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         firebaseAuth = FirebaseAuth.getInstance()
         if (firebaseAuth.currentUser == null) {
@@ -29,7 +36,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         super.onViewCreated(view, savedInstanceState)
         homeBinding = FragmentHomeBinding.bind(view)
-//adapter implementation
+
+
+//adapter implementation for service provider category
 
         categoryTitle = arrayOf(
             "hello1",
@@ -90,6 +99,93 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         categoryRecyclerView.adapter = ServiceCategoryAdapter(categoryArrayList)
 //end of adapter implementation
 
+
+        //adapter implementation for service provider list
+
+        spName = arrayOf(
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+        )
+
+
+        spRatings = arrayOf(
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+            "hello1",
+        )
+
+        spImage = arrayOf(
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+            R.drawable.sample_saloon,
+
+            R.drawable.logo_house_master,
+            R.drawable.sample_saloon,
+            R.drawable.logo_house_master,
+            R.drawable.sample_saloon,
+            R.drawable.logo_house_master,
+            R.drawable.sample_saloon,
+            R.drawable.logo_house_master,
+            R.drawable.sample_saloon,
+        )
+
+        spRecyclerView = homeBinding.homeServiceProviderRV
+        spRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        spRecyclerView.setHasFixedSize(true)
+
+        spArrayList = arrayListOf<ServiceProviderModel>()
+        getSpData()
+
+        spRecyclerView.adapter = ServiceProviderAdapter(spArrayList)
+//end of adapter implementation
+
+
         //this is just to hide ActionBar from the fragment
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
         //this is just to hide BottomNavBar from the fragment
@@ -108,6 +204,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         for (i in categoryTitle.indices) {
             val title = ServiceCategoryModel(categoryTitle[i], categoryImage[i])
             categoryArrayList.add(title)
+        }
+    }
+
+    private fun getSpData() {
+        for (i in spName.indices) {
+            val spModelData = ServiceProviderModel(spName[i], spImage[i], spRatings[i])
+            spArrayList.add(spModelData)
         }
     }
 }
