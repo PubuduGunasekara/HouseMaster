@@ -28,29 +28,44 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         prepareMovieListData()
 
+        var adapter = movieRecyclerViewAdapter
+        adapter?.setOnItemClickListener(object : SearchCategoryAdapter.onItemClickListener {
+            override fun onItemClick(position: Int) {
+                val categoryId = movieList[position].categoryId
+                val categoryTitle = movieList[position].categoryName
+                val action =
+                    SearchFragmentDirections.actionSearchFragmentToIndividualCategorySPListFragment(
+                        categoryId,
+                        categoryTitle
+                    )
+                findNavController().navigate(action)
+            }
+        }
+        )
+
     }
 
     private fun prepareMovieListData() {
-        var movie = ServiceCategoryModel("Avatar", R.drawable.avatar)
+        var movie = ServiceCategoryModel("cate01", "Avatar", R.drawable.avatar)
         movieList.add(movie)
-        movie = ServiceCategoryModel("Batman", R.drawable.batman)
+        movie = ServiceCategoryModel("cate02", "Batman", R.drawable.batman)
         movieList.add(movie)
 
-        movie = ServiceCategoryModel("End Game", R.drawable.end_game)
+        movie = ServiceCategoryModel("cate03", "End Game", R.drawable.end_game)
         movieList.add(movie)
-        movie = ServiceCategoryModel("Hulk", R.drawable.hulk)
+        movie = ServiceCategoryModel("cate04", "Hulk", R.drawable.hulk)
         movieList.add(movie)
-        movie = ServiceCategoryModel("Inception", R.drawable.inception)
+        movie = ServiceCategoryModel("cate05", "Inception", R.drawable.inception)
         movieList.add(movie)
-        movie = ServiceCategoryModel("Jumanji", R.drawable.jumanji)
+        movie = ServiceCategoryModel("cate06", "Jumanji", R.drawable.jumanji)
         movieList.add(movie)
-        movie = ServiceCategoryModel("Lucy", R.drawable.lucy)
+        movie = ServiceCategoryModel("cate07", "Lucy", R.drawable.lucy)
         movieList.add(movie)
-        movie = ServiceCategoryModel("Jurassic World", R.drawable.jurassic_world)
+        movie = ServiceCategoryModel("cate08", "Jurassic World", R.drawable.jurassic_world)
         movieList.add(movie)
-        movie = ServiceCategoryModel("Spider Man", R.drawable.spider_man)
+        movie = ServiceCategoryModel("cate09", "Spider Man", R.drawable.spider_man)
         movieList.add(movie)
-        movie = ServiceCategoryModel("Venom", R.drawable.venom)
+        movie = ServiceCategoryModel("cate10", "Venom", R.drawable.venom)
         movieList.add(movie)
 
         movieRecyclerViewAdapter!!.notifyDataSetChanged()

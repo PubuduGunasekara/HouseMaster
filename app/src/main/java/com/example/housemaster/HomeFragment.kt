@@ -1,5 +1,6 @@
 package com.example.housemaster
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
@@ -19,14 +20,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var categoryRecyclerView: RecyclerView
     private lateinit var categoryArrayList: ArrayList<ServiceCategoryModel>
+
+
     lateinit var categoryTitle: Array<String>
     lateinit var categoryImage: Array<Int>
+    lateinit var categoryId: Array<String>
 
     private lateinit var spRecyclerView: RecyclerView
     private lateinit var spArrayList: ArrayList<ServiceProviderModel>
     lateinit var spName: Array<String>
     lateinit var spImage: Array<Int>
     lateinit var spRatings: Array<String>
+    lateinit var spId: Array<String>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         firebaseAuth = FirebaseAuth.getInstance()
@@ -39,6 +44,29 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
 //adapter implementation for service provider category
+
+        categoryId = arrayOf(
+            "id1",
+            "hello2",
+            "hello3",
+            "hello4",
+            "hello5",
+            "hello6",
+            "hello7",
+            "hello8",
+            "hello9",
+            "hello10",
+            "hello11",
+            "hello12",
+            "hello13",
+            "hello14",
+            "hello15",
+            "hello16",
+            "hello17",
+            "hello18",
+            "hello19",
+            "hello20",
+        )
 
         categoryTitle = arrayOf(
             "hello1",
@@ -96,7 +124,30 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         categoryArrayList = arrayListOf<ServiceCategoryModel>()
         getCategoryData()
 
-        categoryRecyclerView.adapter = ServiceCategoryAdapter(categoryArrayList)
+        var adapter = ServiceCategoryAdapter(categoryArrayList)
+        categoryRecyclerView.adapter = adapter
+        adapter.setOnItemClickListener(object : ServiceCategoryAdapter.onItemClickListener {
+            override fun onItemClick(position: Int) {
+                val categoryId = categoryArrayList[position].categoryId
+                val categoryTitle = categoryArrayList[position].categoryName
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToIndividualCategorySPListFragment(
+                        categoryId,
+                        categoryTitle
+                    )
+                findNavController().navigate(action)
+            }
+        }
+        )
+
+
+        /*homeBinding.homeCategoryRV.setOnClickListener {
+            val categoryId = categoryArrayList[it.id].categoryId
+            val categoryTitle = categoryArrayList[it.id].categoryName
+            val action = HomeFragmentDirections.actionHomeFragmentToIndividualCategorySPListFragment(categoryId,categoryTitle)
+            findNavController().navigate(action)
+        }*/
+
 //end of adapter implementation
 
 
@@ -123,6 +174,29 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             "hello1",
             "hello1",
             "hello1",
+        )
+
+        spId = arrayOf(
+            "-1",
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
         )
 
 
@@ -182,7 +256,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         spArrayList = arrayListOf<ServiceProviderModel>()
         getSpData()
 
-        spRecyclerView.adapter = ServiceProviderAdapter(spArrayList)
+
+        var adapter2 = ServiceProviderAdapter(spArrayList)
+        spRecyclerView.adapter = adapter2
+        adapter2.setOnItemClickListener(object : ServiceProviderAdapter.onItemClickListener {
+            override fun onItemClick(position: Int) {
+                val spId = spArrayList[position].spId
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToServiceItemFragment(
+                        spId
+                    )
+                findNavController().navigate(action)
+            }
+        }
+        )
+
 //end of adapter implementation
 
 
@@ -202,14 +290,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun getCategoryData() {
         for (i in categoryTitle.indices) {
-            val title = ServiceCategoryModel(categoryTitle[i], categoryImage[i])
+            val title = ServiceCategoryModel(categoryId[i], categoryTitle[i], categoryImage[i])
             categoryArrayList.add(title)
         }
     }
 
     private fun getSpData() {
         for (i in spName.indices) {
-            val spModelData = ServiceProviderModel(spName[i], spImage[i], spRatings[i])
+            val spModelData = ServiceProviderModel(spId[i], spName[i], spImage[i], spRatings[i])
             spArrayList.add(spModelData)
         }
     }

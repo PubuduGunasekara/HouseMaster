@@ -18,14 +18,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_homeFragment_to_individualCategoryFragment"
-            app:destination="@id/individualCategoryFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_serviceItemFragment"
             app:destination="@id/serviceItemFragment" />
         <action
             android:id="@+id/action_homeFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_individualCategorySPListFragment"
+            app:destination="@id/individualCategorySPListFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -78,7 +78,11 @@
         android:id="@+id/searchFragment"
         android:name="com.example.housemaster.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_individualCategorySPListFragment"
+            app:destination="@id/individualCategorySPListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.housemaster.SignInFragment"
@@ -144,15 +148,6 @@
             app:destination="@id/RPDoneFragment" />
     </fragment>
     <fragment
-        android:id="@+id/individualCategoryFragment"
-        android:name="com.example.housemaster.IndividualCategoryFragment"
-        android:label="fragment_individual_category"
-        tools:layout="@layout/fragment_individual_category" >
-        <action
-            android:id="@+id/action_individualCategoryFragment_to_serviceItemFragment"
-            app:destination="@id/serviceItemFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/serviceItemFragment"
         android:name="com.example.housemaster.ServiceItemFragment"
         android:label="fragment_service_item"
@@ -160,6 +155,8 @@
         <action
             android:id="@+id/action_serviceItemFragment_to_bookAppointmentFragment"
             app:destination="@id/bookAppointmentFragment" />
+        <argument android:name="serviceItemId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/bookAppointmentFragment"
@@ -238,4 +235,25 @@
             android:id="@+id/action_listCardsFragment_to_addCardsAndAccountsFragment"
             app:destination="@id/addCardsAndAccountsFragment" />
     </fragment><action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment"/><action android:id="@+id/action_global_listCardsFragment" app:destination="@id/listCardsFragment"/><action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment"/>
+    <argument
+        android:name="categoryId"
+        app:argType="string" />
+    <argument
+        android:name="categoryTitle"
+        app:argType="string" />
+    <fragment
+        android:id="@+id/individualCategorySPListFragment"
+        android:name="com.example.housemaster.IndividualCategorySPListFragment"
+        android:label="fragment_individual_category"
+        tools:layout="@layout/fragment_individual_category" >
+        <action
+            android:id="@+id/action_individualCategorySPListFragment_to_serviceItemFragment"
+            app:destination="@id/serviceItemFragment" />
+        <argument
+            android:name="categoryId"
+            app:argType="string" />
+        <argument
+            android:name="categoryTitle"
+            app:argType="string" />
+    </fragment>
 </navigation>

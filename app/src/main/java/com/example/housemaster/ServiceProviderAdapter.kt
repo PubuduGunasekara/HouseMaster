@@ -11,11 +11,23 @@ import org.w3c.dom.Text
 class ServiceProviderAdapter(private val spList: ArrayList<ServiceProviderModel>) :
     RecyclerView.Adapter<ServiceProviderAdapter.ServiceProviderViewHolder>() {
 
+    //for on click
+    private lateinit var mListener: onItemClickListener
+
+    //for on click
+    interface onItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    //for on click
+    fun setOnItemClickListener(listener: onItemClickListener) {
+        mListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceProviderViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.service_provider_item, parent, false)
-        return ServiceProviderViewHolder(itemView)
+        return ServiceProviderViewHolder(itemView, mListener)
     }
 
     override fun getItemCount(): Int {
@@ -30,10 +42,20 @@ class ServiceProviderAdapter(private val spList: ArrayList<ServiceProviderModel>
 
     }
 
-    class ServiceProviderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ServiceProviderViewHolder(itemView: View, listener: ServiceProviderAdapter.onItemClickListener) :
+        RecyclerView.ViewHolder(itemView) {
         val spName: TextView = itemView.findViewById(R.id.spTitle)
         val spImage: ShapeableImageView = itemView.findViewById(R.id.spImage)
         val spRatings: TextView = itemView.findViewById(R.id.spRatings)
+
+        //for on click
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
+
+
     }
 
 }
