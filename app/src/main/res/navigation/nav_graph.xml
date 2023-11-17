@@ -166,6 +166,9 @@
         <action
             android:id="@+id/action_bookAppointmentFragment_to_appointmentPayFragment"
             app:destination="@id/appointmentPayFragment" />
+        <argument
+            android:name="serviceTypeId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/appointmentPayFragment"

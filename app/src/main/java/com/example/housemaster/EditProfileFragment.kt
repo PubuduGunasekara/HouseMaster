@@ -3,6 +3,7 @@ package com.example.housemaster
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
@@ -15,10 +16,19 @@ import com.example.housemaster.databinding.FragmentSearchBinding
 import com.example.housemaster.databinding.FragmentSettingsBinding
 import com.example.housemaster.databinding.FragmentTermsBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
     private lateinit var editProfileBinding: FragmentEditProfileBinding
+    private lateinit var database: DatabaseReference
+    private lateinit var auth: FirebaseAuth
+    private lateinit var authId: String
+    private var userDetails: UserProfileModel? = null
+    private var flag: Boolean = false
 
     //Image picking
     companion object {
@@ -28,6 +38,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         editProfileBinding = FragmentEditProfileBinding.bind(view)
+        auth = FirebaseAuth.getInstance()
+        getUserFromFirebase()
 
         //Image picking
         editProfileBinding.cImageEp.setOnClickListener {
@@ -42,6 +54,10 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
 
 
+
+
+
+
         editProfileBinding.eprofileBtn.setOnClickListener {
             val fName = editProfileBinding.eprofileFname.text.toString()
             val lName = editProfileBinding.eprofileLname.text.toString()
@@ -52,17 +68,85 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
             if (validateEmail() && validateFirstName() && validateLastName() && validateAddress1() && validatePhone()) {
 
-                MaterialAlertDialogBuilder(requireContext()).setTitle("Success")
-                    .setCancelable(false)
-                    .setMessage("Save changes successfully")
-                    .setPositiveButton("Done") { dialog_, which ->
 
-                        val action =
-                            EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment()
-                        findNavController().navigate(action)
+                if (auth.currentUser != null && flag == true) {
+
+                    //create a record
+                    authId = auth.currentUser!!.uid
+                    userDetails =
+                        UserProfileModel(authId, fName, lName, email, phone, address1, address2)
+                    database = Firebase.database.reference.child("User")
+                        .child(authId)
+
+                    database.setValue(userDetails)
+                        .addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                MaterialAlertDialogBuilder(requireContext()).setTitle("Success")
+                                    .setCancelable(false)
+                                    .setMessage("Save changes successfully")
+                                    .setPositiveButton("Done") { dialog_, which ->
+
+                                        val action =
+                                            EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment()
+                                        findNavController().navigate(action)
 
 
-                    }.show()
+                                    }.show()
+
+
+                                editProfileBinding.eprofileFname.text?.clear()
+                                editProfileBinding.eprofileLname.text?.clear()
+                                editProfileBinding.eprofileEmail.text?.clear()
+                                editProfileBinding.eprofilePhone.text?.clear()
+                                editProfileBinding.eprofileAddress1.text?.clear()
+                                editProfileBinding.eprofileAddress2.text?.clear()
+
+
+                            } else {
+                                Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+
+
+                } else {
+
+                    //update a record
+                    val map = mapOf(
+                        "fname" to fName,
+                        "lname" to lName,
+                        "mobile" to phone,
+                        "addressOne" to address1,
+                        "addressTwo" to address2,
+                        "email" to email
+                    )
+                    database.updateChildren(map).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            MaterialAlertDialogBuilder(requireContext()).setTitle("Success")
+                                .setCancelable(false)
+                                .setMessage("Save changes successfully")
+                                .setPositiveButton("Done") { dialog_, which ->
+
+                                    val action =
+                                        EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment()
+                                    findNavController().navigate(action)
+
+
+                                }.show()
+
+                            editProfileBinding.eprofileFname.text?.clear()
+                            editProfileBinding.eprofileLname.text?.clear()
+                            editProfileBinding.eprofileEmail.text?.clear()
+                            editProfileBinding.eprofilePhone.text?.clear()
+                            editProfileBinding.eprofileAddress1.text?.clear()
+                            editProfileBinding.eprofileAddress2.text?.clear()
+                        } else {
+                            Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
+                    }
+                }
 
 
             } else {
@@ -75,6 +159,42 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         }
 
 
+    }
+
+    private fun getUserFromFirebase() {
+        authId = auth.currentUser!!.uid
+        database = Firebase.database.reference.child("User")
+            .child(authId)
+
+        database.get().addOnSuccessListener {
+            if (it.exists()) {
+                flag = true
+                var userId = it.child("userId").value.toString()
+                var fName = it.child("fname").value.toString()
+                var lName = it.child("lname").value.toString()
+                var email = it.child("email").value.toString()
+                var mobile = it.child("mobile").value.toString()
+                var addressOne = it.child("addressOne").value.toString()
+                var addressTwo = it.child("addressTwo").value.toString()
+
+
+
+                editProfileBinding.eprofileFname.setText(fName)
+                editProfileBinding.eprofileLname.setText(lName)
+                editProfileBinding.eprofileEmail.setText(email)
+                editProfileBinding.eprofilePhone.setText(mobile)
+                editProfileBinding.eprofileAddress1.setText(addressOne)
+                editProfileBinding.eprofileAddress2.setText(addressTwo)
+
+
+            } else {
+                flag = false
+
+            }
+        }.addOnFailureListener {
+            flag = false
+            Log.e("firebase", "Error getting data", it)
+        }
     }
 
     //Image picking
