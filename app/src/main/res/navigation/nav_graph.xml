@@ -163,12 +163,15 @@
         android:name="com.example.housemaster.BookAppointmentFragment"
         android:label="fragment_book_appointment"
         tools:layout="@layout/fragment_book_appointment" >
-        <action
-            android:id="@+id/action_bookAppointmentFragment_to_appointmentPayFragment"
-            app:destination="@id/appointmentPayFragment" />
         <argument
             android:name="serviceTypeId"
             app:argType="string" />
+        <argument
+            android:name="serviceTitle"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_bookAppointmentFragment_to_reviewBeforeConAppFragment"
+            app:destination="@id/reviewBeforeConAppFragment" />
     </fragment>
     <fragment
         android:id="@+id/appointmentPayFragment"
@@ -257,6 +260,26 @@
             app:argType="string" />
         <argument
             android:name="categoryTitle"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewBeforeConAppFragment"
+        android:name="com.example.housemaster.ReviewBeforeConAppFragment"
+        android:label="fragment_review_before_confirm_app"
+        tools:layout="@layout/fragment_review_before_confirm_app" >
+        <action
+            android:id="@+id/action_reviewBeforeConAppFragment_to_appointmentPayFragment"
+            app:destination="@id/appointmentPayFragment" />
+        <argument
+            android:name="appTimeSlot"
+            app:argType="string" />
+        <argument
+            android:name="isHomeService"
+            app:argType="boolean" />
+        <argument android:name="appDate" />
+        <argument android:name="appServiceType" />
+        <argument
+            android:name="serviveTypeId"
             app:argType="string" />
     </fragment>
 </navigation>

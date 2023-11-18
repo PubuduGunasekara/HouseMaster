@@ -120,9 +120,10 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
         adapter.setOnItemClickListener(object : ServiceItemTypeAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 val sTypeId = serviceTypeArrayList[position].serviceTypeId
+                val sTypeTitle = serviceTypeArrayList[position].typeTitle
                 val action =
                     ServiceItemFragmentDirections.actionServiceItemFragmentToBookAppointmentFragment(
-                        sTypeId
+                        sTypeId,sTypeTitle
                     )
                 findNavController().navigate(action)
             }

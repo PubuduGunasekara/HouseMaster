@@ -39,6 +39,10 @@
     <string name="secNumber">CVV</string>
     <string name="addCardBtn">Add Card</string>
     <string name="saveCardBtn">Save Card</string>
+    <string name="apmtServiceType">At Home Service</string>
+    <string name="apmtDate">Select the Date</string>
+    <string name="book_apt_select_date_btn">Select Date</string>
+    <string name="apmtTimeSlotText">Select available time slot</string>
 
     <string-array name="months">
         <item>January</item>
