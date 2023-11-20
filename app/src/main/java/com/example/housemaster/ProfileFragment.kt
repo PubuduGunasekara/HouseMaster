@@ -38,9 +38,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
 
         profileBinding.profileEditBtn.setOnClickListener {
-             val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
-             findNavController().navigate(action)
-         }
+            val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
+            findNavController().navigate(action)
+        }
 
 
 
@@ -63,17 +63,35 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 var email = it.child("email").value.toString()
                 var mobile = it.child("mobile").value.toString()
                 var addressOne = it.child("addressOne").value.toString()
-                var addressTwo = it.child("addressTwo").value.toString()
+                var province = it.child("province").value.toString()
+                var streetAddress = it.child("streetAddress").value.toString()
+                var suiteAptNo = it.child("suiteAptNo").value.toString()
+                var city = it.child("city").value.toString()
+                var postalCode = it.child("postalCode").value.toString()
 
                 userDetails =
-                    UserProfileModel(userId, fName, lName, email, mobile, addressOne, addressTwo)
+                    UserProfileModel(
+                        userId,
+                        fName,
+                        lName,
+                        email,
+                        mobile,
+                        streetAddress,
+                        province,
+                        suiteAptNo,
+                        city,
+                        postalCode
+                    )
 
                 profileBinding.profileFName.text = fName
                 profileBinding.profileLName.text = lName
                 profileBinding.profileEmail.text = email
                 profileBinding.profilePhone.text = mobile
-                profileBinding.address1.text = addressOne
-                profileBinding.address2.text = addressTwo
+                profileBinding.streetAddress.text = streetAddress
+                profileBinding.city.text = city
+                profileBinding.postalCode.text = postalCode
+                profileBinding.suiteAptNo.text = suiteAptNo
+                profileBinding.province.text = province
 
 
             } else {
@@ -82,15 +100,21 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 profileBinding.profileLName.visibility = View.GONE
                 profileBinding.profileEmail.visibility = View.GONE
                 profileBinding.profilePhone.visibility = View.GONE
-                profileBinding.address1.visibility = View.GONE
-                profileBinding.address2.visibility = View.GONE
+                profileBinding.streetAddress.visibility = View.GONE
+                profileBinding.city.visibility = View.GONE
+                profileBinding.postalCode.visibility = View.GONE
+                profileBinding.suiteAptNo.visibility = View.GONE
+                profileBinding.province.visibility = View.GONE
 
                 profileBinding.profileFNameIcon.visibility = View.GONE
                 profileBinding.profileLNameIcon.visibility = View.GONE
                 profileBinding.profileEmailIcon.visibility = View.GONE
                 profileBinding.profilePhoneIcon.visibility = View.GONE
-                profileBinding.profileAddress1Icon.visibility = View.GONE
-                profileBinding.profileAddress2Icon.visibility = View.GONE
+                profileBinding.profileStreetAddressIcon.visibility = View.GONE
+                profileBinding.profileCityIcon.visibility = View.GONE
+                profileBinding.profilePostalCodeIcon.visibility = View.GONE
+                profileBinding.profileSuiteAptNoIcon.visibility = View.GONE
+                profileBinding.profileProvinceIcon.visibility = View.GONE
 
             }
         }.addOnFailureListener {

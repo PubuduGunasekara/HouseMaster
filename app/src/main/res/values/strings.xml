@@ -23,8 +23,8 @@
     <string name="profile_edit">Edit Profile</string>
     <string name="btneProfile">Save Changes</string>
     <string name="phoneEProfile">Phone Number</string>
-    <string name="eProfileAddress1">Address Line 1</string>
-    <string name="eProfileAddress2">Address Line 2</string>
+    <string name="eProfileStreetAddress">Street Address</string>
+    <string name="eProfileSuitNumber">Suite/Apt # </string>
     <string name="eProfile_changePassword">Change your password</string>
     <string name="eProfile_changeImage">Change Image</string>
     <string name="btnepChangePW">Change Password</string>
@@ -43,6 +43,18 @@
     <string name="apmtDate">Select the Date</string>
     <string name="book_apt_select_date_btn">Select Date</string>
     <string name="apmtTimeSlotText">Select available time slot</string>
+    <string name="review_service_provider_title">Service Provider:</string>
+    <string name="review_service_type">Service Type:</string>
+    <string name="review_appt_date">Date:</string>
+    <string name="review_appt_time">Time Slot:</string>
+    <string name="review_appt_isAtHome">At Home:</string>
+    <string name="eProfileCity">City</string>
+    <string name="eProfileProvince">Ontario</string>
+    <string name="eProfilePostalCode">Postal Code</string>
+    <string name="review_billingDetails">Billing Details</string>
+    <string name="bill_amount">Amount</string>
+    <string name="bill_hst">HST(13%)</string>
+    <string name="btnConfirmAndPay"><![CDATA[Confirm & Pay]]></string>
 
     <string-array name="months">
         <item>January</item>

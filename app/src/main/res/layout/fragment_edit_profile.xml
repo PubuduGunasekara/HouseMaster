@@ -123,7 +123,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/eprofile_address1_til"
+            android:id="@+id/eprofile_streetAddress_til"
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -134,17 +134,17 @@
             app:boxCornerRadiusTopStart="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/eprofile_address1"
+                android:id="@+id/eprofile_streetAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/eProfileAddress1"
+                android:hint="@string/eProfileStreetAddress"
                 android:inputType="text"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/eprofile_address2_til"
+            android:id="@+id/eprofile_aptSuiteNumber_til"
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -155,10 +155,71 @@
             app:boxCornerRadiusTopStart="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/eprofile_address2"
+                android:id="@+id/eprofile_aptSuiteNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/eProfileAddress2"
+                android:hint="@string/eProfileSuitNumber"
+                android:inputType="text"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="12dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eprofile_city_til"
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eprofile_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/eProfileCity"
+                android:inputType="text"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="12dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eprofile_province_til"
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:enabled="false"
+                android:id="@+id/eprofile_province"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/eProfileProvince"
+                android:inputType="text"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="12dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eprofile_postalCode_til"
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eprofile_postalCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/eProfilePostalCode"
                 android:inputType="text"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp" />

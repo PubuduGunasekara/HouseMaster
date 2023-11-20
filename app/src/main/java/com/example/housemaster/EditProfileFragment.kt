@@ -63,10 +63,13 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
             val lName = editProfileBinding.eprofileLname.text.toString()
             val email = editProfileBinding.eprofileEmail.text.toString()
             val phone = editProfileBinding.eprofilePhone.text.toString()
-            val address1 = editProfileBinding.eprofileAddress1.text.toString()
-            val address2 = editProfileBinding.eprofileAddress2.text.toString()
+            val streetAddress = editProfileBinding.eprofileStreetAddress.text.toString()
+            val suiteAptNo = editProfileBinding.eprofileAptSuiteNumber.text.toString()
+            val province = "Ontario"
+            val city = editProfileBinding.eprofileCity.text.toString()
+            val postalCode = editProfileBinding.eprofilePostalCode.text.toString()
 
-            if (validateEmail() && validateFirstName() && validateLastName() && validateAddress1() && validatePhone()) {
+            if (validateEmail() && validateFirstName() && validateLastName() && validateStreetAddress() && validatePhone() && validateSuiteAptNumber() && validateCity() && validatePostalCode()) {
 
 
                 if (auth.currentUser != null && flag == true) {
@@ -74,7 +77,18 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                     //create a record
                     authId = auth.currentUser!!.uid
                     userDetails =
-                        UserProfileModel(authId, fName, lName, email, phone, address1, address2)
+                        UserProfileModel(
+                            authId,
+                            fName,
+                            lName,
+                            email,
+                            phone,
+                            streetAddress,
+                            province,
+                            suiteAptNo,
+                            city,
+                            postalCode
+                        )
                     database = Firebase.database.reference.child("User")
                         .child(authId)
 
@@ -98,8 +112,13 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                                 editProfileBinding.eprofileLname.text?.clear()
                                 editProfileBinding.eprofileEmail.text?.clear()
                                 editProfileBinding.eprofilePhone.text?.clear()
-                                editProfileBinding.eprofileAddress1.text?.clear()
-                                editProfileBinding.eprofileAddress2.text?.clear()
+
+                                editProfileBinding.eprofileStreetAddress.text?.clear()
+
+                                editProfileBinding.eprofileAptSuiteNumber.text?.clear()
+
+                                editProfileBinding.eprofileCity.text?.clear()
+                                editProfileBinding.eprofilePostalCode.text?.clear()
 
 
                             } else {
@@ -116,8 +135,11 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                         "fname" to fName,
                         "lname" to lName,
                         "mobile" to phone,
-                        "addressOne" to address1,
-                        "addressTwo" to address2,
+                        "streetAddress" to streetAddress,
+                        "suiteAptNo" to suiteAptNo,
+                        "province" to province,
+                        "city" to city,
+                        "postalCode" to postalCode,
                         "email" to email
                     )
                     database.updateChildren(map).addOnCompleteListener {
@@ -138,8 +160,13 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                             editProfileBinding.eprofileLname.text?.clear()
                             editProfileBinding.eprofileEmail.text?.clear()
                             editProfileBinding.eprofilePhone.text?.clear()
-                            editProfileBinding.eprofileAddress1.text?.clear()
-                            editProfileBinding.eprofileAddress2.text?.clear()
+
+                            editProfileBinding.eprofileStreetAddress.text?.clear()
+
+                            editProfileBinding.eprofileAptSuiteNumber.text?.clear()
+
+                            editProfileBinding.eprofileCity.text?.clear()
+                            editProfileBinding.eprofilePostalCode.text?.clear()
                         } else {
                             Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT)
                                 .show()
@@ -153,7 +180,10 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                 validateEmail()
                 validateFirstName()
                 validateLastName()
-                validateAddress1()
+                validateStreetAddress()
+                validateCity()
+                validateSuiteAptNumber()
+                validatePostalCode()
                 validatePhone()
             }
         }
@@ -174,8 +204,12 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                 var lName = it.child("lname").value.toString()
                 var email = it.child("email").value.toString()
                 var mobile = it.child("mobile").value.toString()
-                var addressOne = it.child("addressOne").value.toString()
-                var addressTwo = it.child("addressTwo").value.toString()
+                var streetAddress = it.child("streetAddress").value.toString()
+                var suiteAptNo = it.child("suiteAptNo").value.toString()
+                var city = it.child("city").value.toString()
+                var postalCode = it.child("postalCode").value.toString()
+
+
 
 
 
@@ -183,8 +217,10 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                 editProfileBinding.eprofileLname.setText(lName)
                 editProfileBinding.eprofileEmail.setText(email)
                 editProfileBinding.eprofilePhone.setText(mobile)
-                editProfileBinding.eprofileAddress1.setText(addressOne)
-                editProfileBinding.eprofileAddress2.setText(addressTwo)
+                editProfileBinding.eprofileStreetAddress.setText(streetAddress)
+                editProfileBinding.eprofileCity.setText(city)
+                editProfileBinding.eprofilePostalCode.setText(postalCode)
+                editProfileBinding.eprofileAptSuiteNumber.setText(suiteAptNo)
 
 
             } else {
@@ -280,15 +316,79 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         return errorMessage == null
     }
 
-    private fun validateAddress1(): Boolean {
+    private fun validateStreetAddress(): Boolean {
         var errorMessage: String? = null
-        val value: String = editProfileBinding.eprofileAddress1.text.toString()
+        val value: String = editProfileBinding.eprofileStreetAddress.text.toString()
         if (value.isEmpty()) {
-            errorMessage = "Address line 1 is required"
+            errorMessage = "Street Address is required"
         }
 
         if (errorMessage != null) {
-            editProfileBinding.eprofileAddress1Til.apply {
+            editProfileBinding.eprofileStreetAddressTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+        return errorMessage == null
+    }
+
+    private fun validateSuiteAptNumber(): Boolean {
+        var errorMessage: String? = null
+        val value: String = editProfileBinding.eprofileAptSuiteNumber.text.toString()
+        if (value.isEmpty()) {
+            errorMessage = "Suite/Apt # is required"
+        }
+
+        if (errorMessage != null) {
+            editProfileBinding.eprofileAptSuiteNumberTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+        return errorMessage == null
+    }
+
+    private fun validateProvince(): Boolean {
+        var errorMessage: String? = null
+        val value: String = editProfileBinding.eprofileProvince.text.toString()
+        if (value.isEmpty()) {
+            errorMessage = "Province is required"
+        }
+
+        if (errorMessage != null) {
+            editProfileBinding.eprofileProvinceTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+        return errorMessage == null
+    }
+
+    private fun validateCity(): Boolean {
+        var errorMessage: String? = null
+        val value: String = editProfileBinding.eprofileCity.text.toString()
+        if (value.isEmpty()) {
+            errorMessage = "City is required"
+        }
+
+        if (errorMessage != null) {
+            editProfileBinding.eprofileCityTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+        return errorMessage == null
+    }
+
+    private fun validatePostalCode(): Boolean {
+        var errorMessage: String? = null
+        val value: String = editProfileBinding.eprofilePostalCode.text.toString()
+        if (value.isEmpty()) {
+            errorMessage = "Postal Code is required"
+        }
+
+        if (errorMessage != null) {
+            editProfileBinding.eprofilePostalCodeTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }

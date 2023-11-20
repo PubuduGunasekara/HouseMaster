@@ -1,5 +1,7 @@
 package com.example.housemaster
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +22,9 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
     lateinit var servicePrice: Array<String>
     lateinit var serviceTypeId: Array<String>
 
+    private var serviceTypeSharedPre: String? = null
+    private lateinit var sharedPreferences: SharedPreferences
+
     private lateinit var serviceTypeRecyclerView: RecyclerView
     private lateinit var serviceTypeArrayList: ArrayList<ServiceItemTypeModel>
 
@@ -34,6 +39,14 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
         //this is just to hide BottomNavBar from the fragment
         val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav)
         view.visibility = View.VISIBLE
+
+
+        //shared preference
+        sharedPreferences = requireContext().getSharedPreferences(
+            "com.example.housemaster",
+            Context.MODE_PRIVATE
+        )
+
 
         //serviceItemBinding.serviceItemId.text = args.serviceItemId
 
@@ -121,9 +134,13 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
             override fun onItemClick(position: Int) {
                 val sTypeId = serviceTypeArrayList[position].serviceTypeId
                 val sTypeTitle = serviceTypeArrayList[position].typeTitle
+
+                sharedPreferences.edit().putString("service_type_id", sTypeId).apply()
+                sharedPreferences.edit().putString("service_type_title", sTypeTitle).apply()
+
                 val action =
                     ServiceItemFragmentDirections.actionServiceItemFragmentToBookAppointmentFragment(
-                        sTypeId,sTypeTitle
+                        sTypeId, sTypeTitle
                     )
                 findNavController().navigate(action)
             }

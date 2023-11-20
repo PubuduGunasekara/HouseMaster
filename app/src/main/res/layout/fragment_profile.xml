@@ -145,7 +145,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/profile_address1_group"
+            android:id="@+id/profile_streetAddress_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -156,17 +156,17 @@
 
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profile_address1_icon"
+                android:id="@+id/profile_streetAddress_icon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/baseline_home_24"
+                android:src="@drawable/baseline_streetview_24"
 
                 />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/address1"
+                android:id="@+id/streetAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="asaasasasasasasasasaasas"
@@ -175,7 +175,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/profile_address2_group"
+            android:id="@+id/profile_suiteAptNo_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -186,7 +186,7 @@
 
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profile_address2_icon"
+                android:id="@+id/profile_suiteAptNo_icon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_alignParentStart="true"
@@ -196,10 +196,100 @@
                 />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/address2"
+                android:id="@+id/suiteAptNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="asasasasasasasasasasaassa"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/profile_province_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profile_province_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/baseline_area_chart_24"
+
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/province"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asaasasasasasasasasaasas"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/profile_city_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profile_city_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/baseline_location_city_24"
+
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asaasasasasasasasasaasas"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/profile_postalCode_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profile_postalCode_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/baseline_code_24"
+
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/postalCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asaasasasasasasasasaasas"
                 android:textSize="20sp" />
 
         </LinearLayout>
