@@ -30,10 +30,17 @@ class ProfileChangePasswordFragment : Fragment(R.layout.fragment_profile_change_
 
         profileChangePasswordBinding.epChangePWBtn.setOnClickListener {
 
-            if (validateCurrentPassword() && validateNewPassword() && validateConPassword()) {
+            if (validateCurrentPassword(profileChangePasswordBinding.epCurrentPassword.text.toString()) && validateNewPassword(
+                    profileChangePasswordBinding.epNewPassword.text.toString()
+                ) && validateConPassword(profileChangePasswordBinding.epNewPasswordCon.text.toString())
+            ) {
 
 
-                if (validatePasswordAndConPassword()) {
+                if (validatePasswordAndConPassword(
+                        profileChangePasswordBinding.epNewPassword.text.toString(),
+                        profileChangePasswordBinding.epNewPasswordCon.text.toString()
+                    )
+                ) {
 
                     val user = firebaseAuth.currentUser
                     val currentPassword =
@@ -89,13 +96,16 @@ class ProfileChangePasswordFragment : Fragment(R.layout.fragment_profile_change_
                         }
 
                 } else {
-                    validatePasswordAndConPassword()
+                    validatePasswordAndConPassword(
+                        profileChangePasswordBinding.epNewPassword.text.toString(),
+                        profileChangePasswordBinding.epNewPasswordCon.text.toString()
+                    )
                 }
 
             } else {
-                validateCurrentPassword()
-                validateNewPassword()
-                validateConPassword()
+                validateCurrentPassword(profileChangePasswordBinding.epCurrentPassword.text.toString())
+                validateNewPassword(profileChangePasswordBinding.epNewPassword.text.toString())
+                validateConPassword(profileChangePasswordBinding.epNewPasswordCon.text.toString())
             }
         }
 
@@ -103,74 +113,80 @@ class ProfileChangePasswordFragment : Fragment(R.layout.fragment_profile_change_
     }
 
 
-    private fun validateCurrentPassword(): Boolean {
+    public fun validateCurrentPassword(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = profileChangePasswordBinding.epCurrentPassword.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Current Password is Required"
-        }
-        if (errorMessage != null) {
             profileChangePasswordBinding.epCurrentPasswordTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
-        return errorMessage == null
+
+        return true
     }
 
-    private fun validateNewPassword(): Boolean {
+    public fun validateNewPassword(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = profileChangePasswordBinding.epNewPassword.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "New Password is Required"
-        } else if (value.length < 6) {
-            errorMessage = "New Password must be six characters long"
-        }
-
-        if (errorMessage != null) {
             profileChangePasswordBinding.epNewPasswordTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
+        } else if (value.length < 6) {
+            errorMessage = "New Password must be six characters long"
+            profileChangePasswordBinding.epNewPasswordTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
         }
-        return errorMessage == null
+
+
+        return true
     }
 
-    private fun validateConPassword(): Boolean {
+    public fun validateConPassword(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = profileChangePasswordBinding.epNewPasswordCon.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Confirm Password is required"
-        } else if (value.length < 6) {
-            errorMessage = "Confirm Password must be six characters long"
-        }
-        if (errorMessage != null) {
             profileChangePasswordBinding.epNewPasswordConTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
+        } else if (value.length < 6) {
+            errorMessage = "Confirm Password must be six characters long"
+            profileChangePasswordBinding.epNewPasswordConTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
         }
 
-        return errorMessage == null
+        return true
     }
 
-    private fun validatePasswordAndConPassword(): Boolean {
+    public fun validatePasswordAndConPassword(valPara1: String, valPara2: String): Boolean {
         var errorMessage: String? = null
-        val regPassword: String = profileChangePasswordBinding.epNewPassword.text.toString()
-        val regConPassword: String = profileChangePasswordBinding.epNewPasswordCon.text.toString()
+        val regPassword: String = valPara1
+        val regConPassword: String = valPara2
 
         if (regPassword != regConPassword) {
             errorMessage = "Confirm Password doesn't match with the Password"
-        }
-
-        if (errorMessage != null) {
             profileChangePasswordBinding.epNewPasswordConTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
-
-        return errorMessage == null
+        return true
     }
 
 

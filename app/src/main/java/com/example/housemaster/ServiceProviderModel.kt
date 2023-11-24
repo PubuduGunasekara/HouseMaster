@@ -6,6 +6,6 @@ data class ServiceProviderModel(
     val spId: String,
     val spName: String,
     val spImage: Int,
-    //val spDescription: String,
+    val spCategory: String,
     val spRatings: String
 )

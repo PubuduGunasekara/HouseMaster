@@ -45,27 +45,16 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
 
 
         timeSlot = arrayOf(
-            "id1",
-            "hello2",
-            "hello3",
-            "hello4",
-            "hello5",
-            "hello6",
-            "hello7",
-            "hello8",
-            "hello9",
-            "hello10",
-            "hello11",
-            "hello12",
-            "hello13",
-            "hello14",
-            "hello15",
-            "hello16",
-            "hello17",
-            "hello18",
-            "hello19",
-            "hello20",
-        )
+            "9AM - 10AM",
+            "10AM - 11AM",
+            "11AM - 12PM",
+            "12PM - 01PM",
+            "01PM - 02PM",
+            "02PM - 03PM",
+            "03PM - 04PM",
+            "04PM - 05PM",
+
+            )
 
 
 
@@ -120,8 +109,6 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
                 myCalender.get(Calendar.MONTH),
                 myCalender.get(Calendar.DAY_OF_MONTH)
             ).show()
-
-
 
 
         }

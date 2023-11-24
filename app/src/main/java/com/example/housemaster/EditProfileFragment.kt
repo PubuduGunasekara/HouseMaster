@@ -69,7 +69,16 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
             val city = editProfileBinding.eprofileCity.text.toString()
             val postalCode = editProfileBinding.eprofilePostalCode.text.toString()
 
-            if (validateEmail() && validateFirstName() && validateLastName() && validateStreetAddress() && validatePhone() && validateSuiteAptNumber() && validateCity() && validatePostalCode()) {
+            if (validateEmail(editProfileBinding.eprofileEmail.text.toString()) && validateFirstName(
+                    editProfileBinding.eprofileFname.text.toString()
+                ) && validateLastName(editProfileBinding.eprofileLname.text.toString()) && validateStreetAddress(
+                    editProfileBinding.eprofileStreetAddress.text.toString()
+                ) && validatePhone(editProfileBinding.eprofilePhone.text.toString()) && validateSuiteAptNumber(
+                    editProfileBinding.eprofileAptSuiteNumber.text.toString()
+                ) && validateCity(editProfileBinding.eprofileCity.text.toString()) && validatePostalCode(
+                    editProfileBinding.eprofilePostalCode.text.toString()
+                )
+            ) {
 
 
                 if (auth.currentUser != null && flag == true) {
@@ -177,14 +186,14 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
 
             } else {
-                validateEmail()
-                validateFirstName()
-                validateLastName()
-                validateStreetAddress()
-                validateCity()
-                validateSuiteAptNumber()
-                validatePostalCode()
-                validatePhone()
+                validateEmail(editProfileBinding.eprofileEmail.text.toString())
+                validateFirstName(editProfileBinding.eprofileFname.text.toString())
+                validateLastName(editProfileBinding.eprofileLname.text.toString())
+                validateStreetAddress(editProfileBinding.eprofileStreetAddress.text.toString())
+                validateCity(editProfileBinding.eprofileCity.text.toString())
+                validateSuiteAptNumber(editProfileBinding.eprofileAptSuiteNumber.text.toString())
+                validatePostalCode(editProfileBinding.eprofilePostalCode.text.toString())
+                validatePhone(editProfileBinding.eprofilePhone.text.toString())
             }
         }
 
@@ -248,104 +257,105 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         }
     }
 
-    private fun validateFirstName(): Boolean {
+    public fun validateFirstName(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = editProfileBinding.eprofileFname.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "First Name is Required"
-        }
-        if (errorMessage != null) {
             editProfileBinding.eprofileFnameTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
-        return errorMessage == null
+
+        return true
     }
 
-    private fun validateLastName(): Boolean {
+    public fun validateLastName(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = editProfileBinding.eprofileLname.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Last Name is Required"
-        }
-
-        if (errorMessage != null) {
             editProfileBinding.eprofileLnameTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
-        return errorMessage == null
+
+        return true
     }
 
     //validate Email
-    private fun validateEmail(): Boolean {
+    public fun validateEmail(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = editProfileBinding.eprofileEmail.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Email is required"
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
-            errorMessage = "Invalid Email Address"
-        }
-
-        if (errorMessage != null) {
             editProfileBinding.eprofileEmailTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
+            errorMessage = "Invalid Email Address"
+            editProfileBinding.eprofileEmailTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
         }
-        return errorMessage == null
+
+
+        return true
     }
 
-    private fun validatePhone(): Boolean {
+    public fun validatePhone(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = editProfileBinding.eprofilePhone.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Phone number is required"
+            return false
         } else if (!Patterns.PHONE.matcher(value).matches()) {
             errorMessage = "Invalid Phone Number"
-        }
-
-        if (errorMessage != null) {
             editProfileBinding.eprofilePhoneTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
-        return errorMessage == null
+
+        return true
     }
 
-    private fun validateStreetAddress(): Boolean {
+    public fun validateStreetAddress(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = editProfileBinding.eprofileStreetAddress.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Street Address is required"
-        }
-
-        if (errorMessage != null) {
             editProfileBinding.eprofileStreetAddressTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
-        return errorMessage == null
+        return true
     }
 
-    private fun validateSuiteAptNumber(): Boolean {
+    public fun validateSuiteAptNumber(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = editProfileBinding.eprofileAptSuiteNumber.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Suite/Apt # is required"
-        }
-
-        if (errorMessage != null) {
             editProfileBinding.eprofileAptSuiteNumberTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
-        return errorMessage == null
+
+        return true
     }
 
     private fun validateProvince(): Boolean {
@@ -353,47 +363,42 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         val value: String = editProfileBinding.eprofileProvince.text.toString()
         if (value.isEmpty()) {
             errorMessage = "Province is required"
-        }
-
-        if (errorMessage != null) {
             editProfileBinding.eprofileProvinceTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
+                return false
             }
         }
         return errorMessage == null
     }
 
-    private fun validateCity(): Boolean {
+    public fun validateCity(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = editProfileBinding.eprofileCity.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "City is required"
-        }
-
-        if (errorMessage != null) {
             editProfileBinding.eprofileCityTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
-        return errorMessage == null
+
+        return true
     }
 
-    private fun validatePostalCode(): Boolean {
+    public fun validatePostalCode(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = editProfileBinding.eprofilePostalCode.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Postal Code is required"
-        }
-
-        if (errorMessage != null) {
             editProfileBinding.eprofilePostalCodeTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
-        return errorMessage == null
+        return true
     }
 
 

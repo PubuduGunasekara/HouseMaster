@@ -38,8 +38,19 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
             val password = signUpBinding.signupPassword.text.toString()
             val cPassword = signUpBinding.signupCpassword.text.toString()
 
-            if (validateEmail() && validateFirstName() && validateLastName() && validatePassword() && validateConPassword()) {
-                if (validatePasswordAndConPassword()) {
+            if (validateEmail(signUpBinding.signupEmail.text.toString()) && validateFirstName(
+                    signUpBinding.signupFname.text.toString()
+                ) && validateLastName(
+                    signUpBinding.signupLname.text.toString()
+                ) && validatePassword(signUpBinding.signupPassword.text.toString()) && validateConPassword(
+                    signUpBinding.signupCpassword.text.toString()
+                )
+            ) {
+                if (validatePasswordAndConPassword(
+                        signUpBinding.signupPassword.text.toString(),
+                        signUpBinding.signupCpassword.text.toString()
+                    )
+                ) {
                     firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
@@ -65,14 +76,17 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
                             }
                         }
                 } else {
-                    validatePasswordAndConPassword()
+                    validatePasswordAndConPassword(
+                        signUpBinding.signupPassword.text.toString(),
+                        signUpBinding.signupCpassword.text.toString()
+                    )
                 }
             } else {
-                validateEmail()
-                validateFirstName()
-                validateLastName()
-                validatePassword()
-                validateConPassword()
+                validateEmail(signUpBinding.signupEmail.text.toString())
+                validateFirstName(signUpBinding.signupFname.text.toString())
+                validateLastName(signUpBinding.signupLname.text.toString())
+                validatePassword(signUpBinding.signupPassword.text.toString())
+                validateConPassword(signUpBinding.signupCpassword.text.toString())
             }
         }
 
@@ -85,108 +99,116 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
 
     }
 
-    private fun validateFirstName(): Boolean {
+    public fun validateFirstName(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = signUpBinding.signupFname.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "First Name is Required"
-        }
-        if (errorMessage != null) {
             signUpBinding.signupFnameTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
-        return errorMessage == null
+
+        return true
     }
 
-    private fun validateLastName(): Boolean {
+    public fun validateLastName(valPar: String): Boolean {
         var errorMessage: String? = null
-        val value: String = signUpBinding.signupLname.text.toString()
+        val value: String = valPar
         if (value.isEmpty()) {
             errorMessage = "Last Name is Required"
-        }
-
-        if (errorMessage != null) {
             signUpBinding.signupLnameTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
-        return errorMessage == null
+
+        return true
     }
 
     //validate Email
-    private fun validateEmail(): Boolean {
+    public fun validateEmail(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = signUpBinding.signupEmail.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Email is required"
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
-            errorMessage = "Invalid Email Address"
-        }
-
-        if (errorMessage != null) {
             signUpBinding.signupEmailTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
+            errorMessage = "Invalid Email Address"
+            signUpBinding.signupEmailTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
         }
-        return errorMessage == null
+
+
+        return true
     }
 
-    private fun validatePassword(): Boolean {
+    public fun validatePassword(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = signUpBinding.signupPassword.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Password is required"
-        } else if (value.length < 6) {
-            errorMessage = "Password must be six characters long"
-        }
-        if (errorMessage != null) {
             signUpBinding.signupPasswordTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
+        } else if (value.length < 6) {
+            errorMessage = "Password must be six characters long"
+            signUpBinding.signupPasswordTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
         }
 
-        return errorMessage == null
+        return true
     }
 
-    private fun validateConPassword(): Boolean {
+    public fun validateConPassword(valPara: String): Boolean {
         var errorMessage: String? = null
-        val value: String = signUpBinding.signupCpassword.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Confirm Password is required"
+            return false
         } else if (value.length < 6) {
             errorMessage = "Confirm Password must be six characters long"
-        }
-        if (errorMessage != null) {
             signUpBinding.signupCpasswordTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
 
-        return errorMessage == null
+
+        return true
     }
 
-    private fun validatePasswordAndConPassword(): Boolean {
+    public fun validatePasswordAndConPassword(valPara1: String, valPar2: String): Boolean {
         var errorMessage: String? = null
-        val regPassword: String = signUpBinding.signupPassword.text.toString()
-        val regConPassword: String = signUpBinding.signupCpassword.text.toString()
+        val regPassword: String = valPara1
+        val regConPassword: String = valPar2
 
         if (regPassword != regConPassword) {
             errorMessage = "Confirm Password doesn't match with the Password"
-        }
-
-        if (errorMessage != null) {
             signUpBinding.signupCpasswordTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
+            return false
         }
 
-        return errorMessage == null
+
+        return true
     }
 }

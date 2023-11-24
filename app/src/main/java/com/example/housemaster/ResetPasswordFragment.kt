@@ -35,7 +35,7 @@ class ResetPasswordFragment : Fragment(R.layout.fragment_reset_password) {
 
         resetPasswordBinding.btnSendEmail.setOnClickListener {
             val email = resetPasswordBinding.forgotPwEmail.text.toString()
-            if (validateEmail()) {
+            if (validateEmail(resetPasswordBinding.forgotPwEmail.text.toString())) {
 
 
                 firebaseAuth.sendPasswordResetEmail(email)
@@ -61,7 +61,7 @@ class ResetPasswordFragment : Fragment(R.layout.fragment_reset_password) {
                         }
                     }
             } else {
-                validateEmail()
+                validateEmail(resetPasswordBinding.forgotPwEmail.text.toString())
             }
 
         }
@@ -70,21 +70,45 @@ class ResetPasswordFragment : Fragment(R.layout.fragment_reset_password) {
     }
 
 
-    private fun validateEmail(): Boolean {
+   /* private fun validateEmail(valPara:String): Boolean {
         var errorMessage: String? = null
-        val value: String = resetPasswordBinding.forgotPwEmail.text.toString()
+        val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Email is required"
+            return false
         } else if (!Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
             errorMessage = "Invalid Email Address"
+            return false
         }
 
         if (errorMessage != null) {
             resetPasswordBinding.forgotEmailTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
+                return false
             }
         }
-        return errorMessage == null
+        return true
+    }*/
+    public fun validateEmail(valPara:String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Email is required"
+            resetPasswordBinding.forgotEmailTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
+            errorMessage = "Invalid Email Address"
+            resetPasswordBinding.forgotEmailTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
+        }
+
+        return true
     }
 }

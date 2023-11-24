@@ -19,14 +19,26 @@ import com.example.housemaster.databinding.FragmentSearchBinding
 import com.example.housemaster.databinding.FragmentSettingsBinding
 import com.example.housemaster.databinding.FragmentTermsBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class AddCardsAndAccountsFragment : Fragment(R.layout.fragment_add_cards_and_accounts) {
 
     private lateinit var addCardsAndAccountsBinding: FragmentAddCardsAndAccountsBinding
+    private lateinit var auth: FirebaseAuth
+    private lateinit var authId: String
+    private var userAccCardDetails: userAccCardModel? = null
+    private lateinit var database: DatabaseReference
+    private var dbDataRetreive = Firebase.firestore
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addCardsAndAccountsBinding = FragmentAddCardsAndAccountsBinding.bind(view)
+
+        auth = FirebaseAuth.getInstance()
 
 
         val months = resources.getStringArray(R.array.months)
@@ -43,6 +55,165 @@ class AddCardsAndAccountsFragment : Fragment(R.layout.fragment_add_cards_and_acc
                 AddCardsAndAccountsFragmentDirections.actionAddCardsAndAccountsFragmentToListCardsFragment()
             findNavController().navigate(action)
         }
+
+
+        addCardsAndAccountsBinding.addCardBtn.setOnClickListener {
+            val nameOnCard = addCardsAndAccountsBinding.cardName.text.toString()
+            val cardNumber = addCardsAndAccountsBinding.cardNumber.text.toString()
+            val expMonth = addCardsAndAccountsBinding.expirationMonth.text.toString()
+            val expYear = addCardsAndAccountsBinding.expirationYear.text.toString()
+            val cvv = addCardsAndAccountsBinding.secNumber.text.toString()
+
+
+
+
+            if (validateNameOnCard(nameOnCard) && validateCardNumber(cardNumber) && validateExpMonth(
+                    expMonth
+                )
+                && validateExpYear(expYear)
+                && validateCVV(cvv)
+            ) {
+
+
+                if (auth.currentUser != null) {
+
+                    //create a record
+                    authId = auth.currentUser!!.uid
+
+
+
+                    userAccCardDetails =
+                        userAccCardModel(
+                            nameOnCard, cardNumber, expMonth, expYear, cvv
+                        )
+
+                    val cardDetailMap = hashMapOf(
+                        "userId" to authId,
+                        "nameOnCard" to nameOnCard,
+                        "cardNumber" to cardNumber,
+                        "expMonth" to expMonth,
+                        "expYear" to expYear,
+                        "cvv" to cvv
+                    )
+
+                    dbDataRetreive.collection("CustomerCardAccountDetails").document(authId)
+                        .set(cardDetailMap)
+                        .addOnSuccessListener {
+
+                            MaterialAlertDialogBuilder(requireContext()).setTitle("Success")
+                                .setCancelable(false)
+                                .setMessage("Save changes successfully")
+                                .setPositiveButton("Done") { dialog_, which ->
+
+                                    val action =
+                                        AddCardsAndAccountsFragmentDirections.actionAddCardsAndAccountsFragmentToListCardsFragment()
+                                    findNavController().navigate(action)
+
+
+                                }.show()
+
+
+                            addCardsAndAccountsBinding.cardName.text?.clear()
+                            addCardsAndAccountsBinding.cardNumber.text?.clear()
+                            addCardsAndAccountsBinding.expirationYear.text?.clear()
+                            addCardsAndAccountsBinding.expirationMonth.text?.clear()
+
+                            addCardsAndAccountsBinding.secNumber.text?.clear()
+
+
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(requireContext(), "Failed", Toast.LENGTH_LONG).show()
+
+                        }
+
+
+                } else {
+//please log in again
+                }
+
+
+            } else {
+                validateCardNumber(cardNumber)
+                validateNameOnCard(nameOnCard)
+                validateExpMonth(expMonth)
+                validateExpYear(expYear)
+                validateCVV(cvv)
+            }
+        }
+
+
+    }
+
+    public fun validateNameOnCard(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Name is Required"
+            addCardsAndAccountsBinding.cardNameTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
+        }
+
+        return true
+    }
+
+    public fun validateCardNumber(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Card Number is Required"
+            addCardsAndAccountsBinding.cardNumberTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
+        }
+        return true
+    }
+
+    public fun validateCVV(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "CVV is Required"
+            addCardsAndAccountsBinding.secNumberTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
+        }
+        return true
+    }
+
+    public fun validateExpMonth(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Required"
+            addCardsAndAccountsBinding.expirationMonthTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
+        }
+        return true
+    }
+
+    public fun validateExpYear(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Required"
+            addCardsAndAccountsBinding.expirationYearTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
+        }
+        return true
     }
 
 

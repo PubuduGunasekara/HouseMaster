@@ -157,6 +157,13 @@
             app:destination="@id/bookAppointmentFragment" />
         <argument android:name="serviceItemId"
             app:argType="string" />
+        <argument
+            android:name="serviceCategory"
+            app:argType="string" />
+        <argument
+            android:name="spName"
+            app:argType="string" />
+        <argument android:name="spRatings" />
     </fragment>
     <fragment
         android:id="@+id/bookAppointmentFragment"

@@ -37,7 +37,7 @@ class ServiceItemTypeAdapter(private val itemList: ArrayList<ServiceItemTypeMode
     override fun onBindViewHolder(holder: ItemTypeViewHolder, position: Int) {
         val currentItem = itemList[position]
         holder.itemTitle.text = currentItem.typeTitle
-        holder.itemPrice.text = currentItem.typePrice
+        holder.itemPrice.text = currentItem.typePrice.toString()
 
 
     }

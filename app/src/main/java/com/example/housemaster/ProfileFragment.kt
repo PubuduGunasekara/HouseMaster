@@ -44,18 +44,19 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
 
 
-        getUserFromFirebase()
+        getUserFromFirebase(firebaseAuth.currentUser!!.uid)
 
 
     }
 
 
-    private fun getUserFromFirebase() {
-        authId = firebaseAuth.currentUser!!.uid
+    public fun getUserFromFirebase(authId: String) {
+
         database = Firebase.database.reference.child("User")
             .child(authId)
 
         database.get().addOnSuccessListener {
+
             if (it.exists()) {
                 var userId = it.child("userId").value.toString()
                 var fName = it.child("fname").value.toString()
@@ -119,6 +120,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             }
         }.addOnFailureListener {
             Log.e("firebase", "Error getting data", it)
+
         }
     }
 }

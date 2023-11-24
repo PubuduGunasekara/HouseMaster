@@ -43,7 +43,7 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
 
 
 
-            if (validateEmail() && validatePassword()) {
+            if (validateEmail(signInBinding.signinEmail.text.toString()) && validatePassword(signInBinding.signinPassword.text.toString())) {
 
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener {
@@ -65,8 +65,8 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
                     }
 
             } else {
-                validateEmail()
-                validatePassword()
+                validateEmail(signInBinding.signinEmail.text.toString())
+                validatePassword(signInBinding.signinPassword.text.toString())
             }
         }
 
@@ -99,8 +99,35 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
         super.onCreate(savedInstanceState)
     }
 
+    /**
+     * the input is not valid if..
+     * ...the email is empty
+     *...the email is invalid
+     */
+
     //validate Email
-    private fun validateEmail(): Boolean {
+    public fun validateEmail(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Email is required"
+            signInBinding.signinEmailTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+            return false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
+            errorMessage = "Invalid Email Address"
+            signInBinding.signinEmailTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+                return false
+            }
+        }
+        return true
+    }
+
+    /*private fun validateEmail(): Boolean {
         var errorMessage: String? = null
         val value: String = signInBinding.signinEmail.text.toString()
         if (value.isEmpty()) {
@@ -116,9 +143,24 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
             }
         }
         return errorMessage == null
+    }*/
+
+    public fun validatePassword(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String =valPara
+        if (value.isEmpty()) {
+            errorMessage = "Password is required"
+            signInBinding.signinPasswordTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+                return false
+            }
+        }
+
+        return true
     }
 
-    private fun validatePassword(): Boolean {
+   /* private fun validatePassword(): Boolean {
         var errorMessage: String? = null
         val value: String = signInBinding.signinPassword.text.toString()
         if (value.isEmpty()) {
@@ -132,6 +174,5 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
         }
 
         return errorMessage == null
-    }
-
+    }*/
 }
