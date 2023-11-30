@@ -67,11 +67,11 @@ class AddCardsAndAccountsFragment : Fragment(R.layout.fragment_add_cards_and_acc
 
 
 
-            if (validateNameOnCard(nameOnCard) && validateCardNumber(cardNumber) && validateExpMonth(
-                    expMonth
-                )
-                && validateExpYear(expYear)
-                && validateCVV(cvv)
+            if (validateNameOnCard(addCardsAndAccountsBinding.cardName.text.toString()) && validateCardNumber(
+                    addCardsAndAccountsBinding.cardNumber.text.toString()
+                ) && validateExpMonth(addCardsAndAccountsBinding.expirationMonth.text.toString()) && validateExpYear(
+                    addCardsAndAccountsBinding.expirationYear.text.toString()
+                ) && validateCVV(addCardsAndAccountsBinding.secNumber.text.toString())
             ) {
 
 
@@ -134,17 +134,34 @@ class AddCardsAndAccountsFragment : Fragment(R.layout.fragment_add_cards_and_acc
 
 
             } else {
-                validateCardNumber(cardNumber)
-                validateNameOnCard(nameOnCard)
-                validateExpMonth(expMonth)
-                validateExpYear(expYear)
-                validateCVV(cvv)
+                validateCardNumber(addCardsAndAccountsBinding.cardNumber.text.toString())
+                validateNameOnCard(addCardsAndAccountsBinding.cardName.text.toString())
+                validateExpMonth(addCardsAndAccountsBinding.expirationMonth.text.toString())
+                validateExpYear(addCardsAndAccountsBinding.expirationYear.text.toString())
+                validateCVV(addCardsAndAccountsBinding.secNumber.text.toString())
             }
         }
 
 
     }
 
+    /*public fun validateNameOnCard(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Name is Required"
+
+            return false
+        }
+        if (errorMessage != null) {
+            addCardsAndAccountsBinding.cardNameTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+        return true
+    }
+*/
     public fun validateNameOnCard(valPara: String): Boolean {
         var errorMessage: String? = null
         val value: String = valPara
@@ -160,6 +177,23 @@ class AddCardsAndAccountsFragment : Fragment(R.layout.fragment_add_cards_and_acc
         return true
     }
 
+   /* public fun validateCardNumber(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Card Number is Required"
+
+            return false
+        }
+        if (errorMessage != null) {
+            addCardsAndAccountsBinding.cardNumberTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+        return true
+    }
+*/
     public fun validateCardNumber(valPara: String): Boolean {
         var errorMessage: String? = null
         val value: String = valPara
@@ -174,19 +208,54 @@ class AddCardsAndAccountsFragment : Fragment(R.layout.fragment_add_cards_and_acc
         return true
     }
 
-    public fun validateCVV(valPara: String): Boolean {
+   /* public fun validateCVV(valPara: String): Boolean {
         var errorMessage: String? = null
         val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "CVV is Required"
+
+            return false
+        }
+
+        if (errorMessage != null) {
             addCardsAndAccountsBinding.secNumberTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
-            return false
         }
         return true
-    }
+    }*/
+
+    public fun validateCVV(valPara: String): Boolean {
+         var errorMessage: String? = null
+         val value: String = valPara
+         if (value.isEmpty()) {
+             errorMessage = "CVV is Required"
+             addCardsAndAccountsBinding.secNumberTil.apply {
+                 isErrorEnabled = true
+                 error = errorMessage
+             }
+             return false
+         }
+         return true
+     }
+
+   /* public fun validateExpMonth(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Required"
+
+            return false
+        }
+        if (errorMessage != null) {
+            addCardsAndAccountsBinding.expirationMonthTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+        return true
+    }*/
 
     public fun validateExpMonth(valPara: String): Boolean {
         var errorMessage: String? = null
@@ -215,6 +284,23 @@ class AddCardsAndAccountsFragment : Fragment(R.layout.fragment_add_cards_and_acc
         }
         return true
     }
+
+   /* public fun validateExpYear(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Required"
+            return false
+        }
+
+        if (errorMessage != null) {
+            addCardsAndAccountsBinding.expirationYearTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+        return true
+    }*/
 
 
 }

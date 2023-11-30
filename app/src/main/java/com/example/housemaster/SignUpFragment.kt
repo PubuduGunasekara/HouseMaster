@@ -98,6 +98,134 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
 
 
     }
+/*
+    public fun validateFirstName(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "First Name is Required"
+
+            return false
+        }
+
+        if (errorMessage != null) {
+            signUpBinding.signupFnameTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+
+        return true
+    }
+
+    public fun validateLastName(valPar: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPar
+        if (value.isEmpty()) {
+            errorMessage = "Last Name is Required"
+
+            return false
+        }
+        if (errorMessage != null) {
+            signUpBinding.signupLnameTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+        return true
+    }
+
+    //validate Email
+    public fun validateEmail(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Email is required"
+
+            return false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
+            errorMessage = "Invalid Email Address"
+
+            return false
+        }
+        if (errorMessage != null) {
+            signUpBinding.signupEmailTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+
+        return true
+    }
+
+    public fun validatePassword(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Password is required"
+
+            return false
+        } else if (value.length < 6) {
+            errorMessage = "Password must be six characters long"
+
+            return false
+        }
+        if (errorMessage != null) {
+            signUpBinding.signupPasswordTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+
+        return true
+    }
+
+    public fun validateConPassword(valPara: String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Confirm Password is required"
+            return false
+        } else if (value.length < 6) {
+            errorMessage = "Confirm Password must be six characters long"
+
+            return false
+        }
+        if (errorMessage != null) {
+            signUpBinding.signupCpasswordTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+
+        return true
+    }
+
+    public fun validatePasswordAndConPassword(valPara1: String, valPar2: String): Boolean {
+        var errorMessage: String? = null
+        val regPassword: String = valPara1
+        val regConPassword: String = valPar2
+
+        if (regPassword != regConPassword) {
+            errorMessage = "Confirm Password doesn't match with the Password"
+
+            return false
+        }
+        if (errorMessage != null) {
+            signUpBinding.signupCpasswordTil.apply {
+                isErrorEnabled = true
+                error = errorMessage
+            }
+        }
+
+        return true
+    }
+
+*/
+
+
+
+
 
     public fun validateFirstName(valPara: String): Boolean {
         var errorMessage: String? = null
@@ -211,4 +339,9 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
 
         return true
     }
+
+
+
+
+
 }

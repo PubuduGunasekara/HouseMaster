@@ -111,18 +111,21 @@ class ProfileChangePasswordFragment : Fragment(R.layout.fragment_profile_change_
 
 
     }
-
-
+/*
     public fun validateCurrentPassword(valPara: String): Boolean {
         var errorMessage: String? = null
         val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Current Password is Required"
+
+            return false
+        }
+
+        if (errorMessage != null) {
             profileChangePasswordBinding.epCurrentPasswordTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
-            return false
         }
 
         return true
@@ -133,20 +136,19 @@ class ProfileChangePasswordFragment : Fragment(R.layout.fragment_profile_change_
         val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "New Password is Required"
-            profileChangePasswordBinding.epNewPasswordTil.apply {
-                isErrorEnabled = true
-                error = errorMessage
-            }
+
             return false
         } else if (value.length < 6) {
             errorMessage = "New Password must be six characters long"
+
+            return false
+        }
+        if (errorMessage != null) {
             profileChangePasswordBinding.epNewPasswordTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
-            return false
         }
-
 
         return true
     }
@@ -156,18 +158,19 @@ class ProfileChangePasswordFragment : Fragment(R.layout.fragment_profile_change_
         val value: String = valPara
         if (value.isEmpty()) {
             errorMessage = "Confirm Password is required"
-            profileChangePasswordBinding.epNewPasswordConTil.apply {
-                isErrorEnabled = true
-                error = errorMessage
-            }
+
             return false
         } else if (value.length < 6) {
             errorMessage = "Confirm Password must be six characters long"
+
+            return false
+        }
+
+        if (errorMessage != null) {
             profileChangePasswordBinding.epNewPasswordConTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
-            return false
         }
 
         return true
@@ -180,14 +183,96 @@ class ProfileChangePasswordFragment : Fragment(R.layout.fragment_profile_change_
 
         if (regPassword != regConPassword) {
             errorMessage = "Confirm Password doesn't match with the Password"
+
+            return false
+        }
+
+        if (errorMessage != null) {
             profileChangePasswordBinding.epNewPasswordConTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
             }
-            return false
         }
         return true
     }
+*/
+
+
+        public fun validateCurrentPassword(valPara: String): Boolean {
+            var errorMessage: String? = null
+            val value: String = valPara
+            if (value.isEmpty()) {
+                errorMessage = "Current Password is Required"
+                profileChangePasswordBinding.epCurrentPasswordTil.apply {
+                    isErrorEnabled = true
+                    error = errorMessage
+                }
+                return false
+            }
+
+            return true
+        }
+
+        public fun validateNewPassword(valPara: String): Boolean {
+            var errorMessage: String? = null
+            val value: String = valPara
+            if (value.isEmpty()) {
+                errorMessage = "New Password is Required"
+                profileChangePasswordBinding.epNewPasswordTil.apply {
+                    isErrorEnabled = true
+                    error = errorMessage
+                }
+                return false
+            } else if (value.length < 6) {
+                errorMessage = "New Password must be six characters long"
+                profileChangePasswordBinding.epNewPasswordTil.apply {
+                    isErrorEnabled = true
+                    error = errorMessage
+                }
+                return false
+            }
+
+
+            return true
+        }
+
+        public fun validateConPassword(valPara: String): Boolean {
+            var errorMessage: String? = null
+            val value: String = valPara
+            if (value.isEmpty()) {
+                errorMessage = "Confirm Password is required"
+                profileChangePasswordBinding.epNewPasswordConTil.apply {
+                    isErrorEnabled = true
+                    error = errorMessage
+                }
+                return false
+            } else if (value.length < 6) {
+                errorMessage = "Confirm Password must be six characters long"
+                profileChangePasswordBinding.epNewPasswordConTil.apply {
+                    isErrorEnabled = true
+                    error = errorMessage
+                }
+                return false
+            }
+
+            return true
+        }
+
+        public fun validatePasswordAndConPassword(valPara1: String, valPara2: String): Boolean {
+            var errorMessage: String? = null
+            val regPassword: String = valPara1
+            val regConPassword: String = valPara2
+
+            if (regPassword != regConPassword) {
+                errorMessage = "Confirm Password doesn't match with the Password"
+                profileChangePasswordBinding.epNewPasswordConTil.apply {
+                    isErrorEnabled = true
+                    error = errorMessage
+                }
+                return false
+            }
+            return true
+        }
 
 
 }

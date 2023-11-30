@@ -70,7 +70,7 @@ class ResetPasswordFragment : Fragment(R.layout.fragment_reset_password) {
     }
 
 
-   /* private fun validateEmail(valPara:String): Boolean {
+    /*private fun validateEmail(valPara:String): Boolean {
         var errorMessage: String? = null
         val value: String = valPara
         if (value.isEmpty()) {
@@ -90,6 +90,30 @@ class ResetPasswordFragment : Fragment(R.layout.fragment_reset_password) {
         }
         return true
     }*/
+    /*public fun validateEmail(valPara:String): Boolean {
+        var errorMessage: String? = null
+        val value: String = valPara
+        if (value.isEmpty()) {
+            errorMessage = "Email is required"
+
+            return false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
+            errorMessage = "Invalid Email Address"
+
+            return false
+        }
+
+       if (errorMessage != null) {
+           resetPasswordBinding.forgotEmailTil.apply {
+               isErrorEnabled = true
+               error = errorMessage
+           }
+       }
+
+        return true
+    }
+
+*/
     public fun validateEmail(valPara:String): Boolean {
         var errorMessage: String? = null
         val value: String = valPara
@@ -111,4 +135,6 @@ class ResetPasswordFragment : Fragment(R.layout.fragment_reset_password) {
 
         return true
     }
+
+
 }

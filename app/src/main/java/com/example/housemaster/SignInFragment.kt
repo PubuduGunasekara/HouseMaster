@@ -114,6 +114,7 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
             signInBinding.signinEmailTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
+
             }
             return false
         } else if (!Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
@@ -121,13 +122,15 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
             signInBinding.signinEmailTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
-                return false
+
             }
+            return false
         }
+
         return true
     }
 
-    /*private fun validateEmail(): Boolean {
+ /*   private fun validateEmail(): Boolean {
         var errorMessage: String? = null
         val value: String = signInBinding.signinEmail.text.toString()
         if (value.isEmpty()) {
@@ -143,8 +146,8 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
             }
         }
         return errorMessage == null
-    }*/
-
+    }
+*/
     public fun validatePassword(valPara: String): Boolean {
         var errorMessage: String? = null
         val value: String =valPara
@@ -153,14 +156,17 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
             signInBinding.signinPasswordTil.apply {
                 isErrorEnabled = true
                 error = errorMessage
-                return false
+
             }
+            return false
         }
+
+
 
         return true
     }
 
-   /* private fun validatePassword(): Boolean {
+  /*  private fun validatePassword(): Boolean {
         var errorMessage: String? = null
         val value: String = signInBinding.signinPassword.text.toString()
         if (value.isEmpty()) {
