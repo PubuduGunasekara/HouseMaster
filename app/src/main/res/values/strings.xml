@@ -55,6 +55,10 @@
     <string name="bill_amount">Amount</string>
     <string name="bill_hst">HST(13%)</string>
     <string name="btnConfirmAndPay"><![CDATA[Confirm & Pay]]></string>
+    <string name="upcoming_appointment">Upcoming Appointments</string>
+    <string name="previous_appointment">Previous Appointments</string>
+    <string name="no_prev_pt">No previous appointments!</string>
+    <string name="no_upcoming_pt">No upcoming appointments!</string>
 
     <string-array name="months">
         <item>January</item>

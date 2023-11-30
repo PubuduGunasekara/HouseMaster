@@ -289,4 +289,22 @@
             android:name="serviveTypeId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/appointmentHistoryFragment"
+        android:name="com.example.housemaster.AppointmentHistoryFragment"
+        android:label="fragment_appointment_history"
+        tools:layout="@layout/fragment_appointment_history" >
+        <action
+            android:id="@+id/action_appointmentHistoryFragment_to_appointmentItemFragment"
+            app:destination="@id/appointmentItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appointmentItemFragment"
+        android:name="com.example.housemaster.AppointmentItemFragment"
+        android:label="fragment_appointment_item"
+        tools:layout="@layout/fragment_appointment_item" >
+        <argument
+            android:name="aptId"
+            app:argType="string" />
+    </fragment>
 </navigation>
