@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
+import com.squareup.picasso.Picasso
 
 class ServiceCategoryAdapter(private val categoryList: ArrayList<ServiceCategoryModel>) :
     RecyclerView.Adapter<ServiceCategoryAdapter.CategoryViewHolder>() {
@@ -37,7 +38,7 @@ class ServiceCategoryAdapter(private val categoryList: ArrayList<ServiceCategory
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val currentItem = categoryList[position]
         holder.categoryTitle.text = currentItem.categoryName
-        holder.categoryImage.setImageResource(currentItem.categoryImage)
+        Picasso.get().load(currentItem.categoryImage).into(holder.categoryImage)
 
 
     }

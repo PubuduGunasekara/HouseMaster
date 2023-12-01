@@ -65,12 +65,12 @@ class AppointmentHistoryFragment : Fragment(R.layout.fragment_appointment_histor
                 if (!documentSnapshot.isEmpty) {
                     aptHistoryBinding.llUpcomingAptNoData.isGone = true
                     val documents = documentSnapshot.documents
-                    for (sptData in documents) {
+                    for (aptData in documents) {
                         val data = AppointmentListModel(
-                            sptData.id,
-                            sptData["ServiceProviderName"].toString(),
-                            sptData["apptDate"].toString(),
-                            sptData["ServiceProviderName"].toString(),
+                            aptData.id,
+                            aptData["ServiceProviderName"].toString(),
+                            aptData["apptDate"].toString(),
+                            aptData["ServiceCategory"].toString(),
                         )
                         aptListUpcoming.add(data)
 
@@ -79,10 +79,10 @@ class AppointmentHistoryFragment : Fragment(R.layout.fragment_appointment_histor
                         adapter2.setOnItemClickListener(object :
                             AppointmentHistoryAdapter.onItemClickListener {
                             override fun onItemClick(position: Int) {
-                                val spId = aptListUpcoming[position].aptId
+                                val aptId = aptListUpcoming[position].aptId
                                 val action =
                                     AppointmentHistoryFragmentDirections.actionAppointmentHistoryFragmentToAppointmentItemFragment(
-                                        spId
+                                        aptId
                                     )
                                 findNavController().navigate(action)
                             }

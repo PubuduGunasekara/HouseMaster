@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable
 data class ServiceProviderModel(
     val spId: String,
     val spName: String,
-    val spImage: Int,
+    val spImage: String,
     val spCategory: String,
     val spRatings: String
 )

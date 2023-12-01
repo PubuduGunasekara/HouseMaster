@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
+import com.squareup.picasso.Picasso
 
 class SearchCategoryAdapter(private val movieList: ArrayList<ServiceCategoryModel>) :
     RecyclerView.Adapter<SearchCategoryAdapter.MovieViewHolder>() {
@@ -37,7 +38,7 @@ class SearchCategoryAdapter(private val movieList: ArrayList<ServiceCategoryMode
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val currentItem = movieList[position]
         holder.movieTitle.text = currentItem.categoryName
-        holder.movieImage.setImageResource(currentItem.categoryImage)
+        Picasso.get().load(currentItem.categoryImage).into(holder.movieImage)
     }
 
     class MovieViewHolder(itemView: View, listener: onItemClickListener) :

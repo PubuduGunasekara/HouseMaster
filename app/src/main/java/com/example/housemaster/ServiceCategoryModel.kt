@@ -5,6 +5,6 @@ import android.graphics.drawable.Drawable
 data class ServiceCategoryModel(
     val categoryId: String,
     val categoryName: String,
-    val categoryImage: Int,
+    val categoryImage: String,
     //val categoryDescription: String
 )

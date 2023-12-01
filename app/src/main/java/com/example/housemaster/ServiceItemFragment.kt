@@ -17,6 +17,7 @@ import com.example.housemaster.databinding.FragmentIndividualCategoryBinding
 import com.example.housemaster.databinding.FragmentServiceItemBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 
 class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
     private val args: ServiceItemFragmentArgs by navArgs()
@@ -58,6 +59,7 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
         serviceItemBinding.siCategory.text = args.serviceCategory
         serviceItemBinding.siRatings.text = args.spRatings + "/5"
         serviceItemBinding.siTitle.text = args.spName
+        Picasso.get().load(args.spImage).into(serviceItemBinding.siCoverImage)
 
 
         serviceType = arrayOf(
@@ -219,7 +221,11 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
                         sharedPreferences.edit().putString("service_type_id", sTypeId).apply()
                         sharedPreferences.edit().putString("service_type_title", sTypeTitle)
                             .apply()
-                        sharedPreferences.edit().putFloat("service_type_price",
+                        sharedPreferences.edit()
+                            .putString("service_item_category", args.serviceCategory)
+                            .apply()
+                        sharedPreferences.edit().putFloat(
+                            "service_type_price",
                             sTypePrice.toFloat()
                         )
                             .apply()

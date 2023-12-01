@@ -59,6 +59,9 @@
     <string name="previous_appointment">Previous Appointments</string>
     <string name="no_prev_pt">No previous appointments!</string>
     <string name="no_upcoming_pt">No upcoming appointments!</string>
+    <string name="bill_total">Total</string>
+    <string name="rbc_add_or_change_card">Add/Change Card</string>
+    <string name="card_use">Card use</string>
 
     <string-array name="months">
         <item>January</item>

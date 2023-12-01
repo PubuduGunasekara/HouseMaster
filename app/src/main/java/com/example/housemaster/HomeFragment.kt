@@ -85,7 +85,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     val data = ServiceCategoryModel(
                         category.id,
                         category["categoryName"].toString(),
-                        R.drawable.sample_saloon
+                        category["categoryImage"].toString()
                     )
                     categoryArrayList.add(data)
 
@@ -136,8 +136,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     val data = ServiceProviderModel(
                         spData.id,
                         spData["shopName"].toString(),
-                        R.drawable.sample_saloon,
-                        spData["serviceCategory"].toString(),
+                        spData["image"].toString(),
+                        spData["selectedService"].toString(),
                         spData["shopRatings"].toString(),
                     )
                     spArrayList.add(data)
@@ -151,9 +151,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             val spName = spArrayList[position].spName
                             val spRatings = spArrayList[position].spRatings
                             val spCategory = spArrayList[position].spCategory
+                            val spImage = spArrayList[position].spImage
                             val action =
                                 HomeFragmentDirections.actionHomeFragmentToServiceItemFragment(
-                                    spId, spCategory, spName, spRatings
+                                    spId, spCategory, spName, spRatings,spImage
                                 )
                             findNavController().navigate(action)
                         }

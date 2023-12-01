@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
+import com.squareup.picasso.Picasso
 import org.w3c.dom.Text
 
 class ServiceProviderAdapter(private val spList: ArrayList<ServiceProviderModel>) :
@@ -38,7 +39,7 @@ class ServiceProviderAdapter(private val spList: ArrayList<ServiceProviderModel>
         val currentItem = spList[position]
         holder.spName.text = currentItem.spName
         holder.spRatings.text = currentItem.spRatings
-        holder.spImage.setImageResource(currentItem.spImage)
+        Picasso.get().load(currentItem.spImage).into(holder.spImage)
 
     }
 

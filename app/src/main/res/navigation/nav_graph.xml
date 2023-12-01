@@ -163,7 +163,11 @@
         <argument
             android:name="spName"
             app:argType="string" />
-        <argument android:name="spRatings" />
+        <argument android:name="spRatings"
+            app:argType="string" />
+        <argument
+            android:name="spImage"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/bookAppointmentFragment"

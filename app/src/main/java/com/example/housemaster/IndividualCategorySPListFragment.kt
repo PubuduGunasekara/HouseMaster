@@ -59,7 +59,7 @@ class IndividualCategorySPListFragment : Fragment(R.layout.fragment_individual_c
                     val data = ServiceProviderModel(
                         spData.id,
                         spData["shopName"].toString(),
-                        R.drawable.sample_saloon,
+                        spData["image"].toString(),
                         spData["serviceCategory"].toString(),
                         spData["shopRatings"].toString(),
                     )
@@ -74,9 +74,10 @@ class IndividualCategorySPListFragment : Fragment(R.layout.fragment_individual_c
                             val spName = spArrayList[position].spName
                             val spRatings = spArrayList[position].spRatings
                             val spCategory = spArrayList[position].spCategory
+                            val spImage = spArrayList[position].spImage
                             val action =
                                 IndividualCategorySPListFragmentDirections.actionIndividualCategorySPListFragmentToServiceItemFragment(
-                                    spId, spCategory, spName, spRatings
+                                    spId, spCategory, spName, spRatings, spImage
                                 )
                             findNavController().navigate(action)
                         }
