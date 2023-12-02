@@ -79,14 +79,14 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
         )
 
         //switch
-        bookAppointmentBinding.aptServiceType.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        /*bookAppointmentBinding.aptServiceType.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             // do something, the isChecked will be
             // true if the switch is in the On position
             if (isChecked) {
                 isHomeServiceEnable = true
 
             }
-        })
+        })*/
 
 
 //date time

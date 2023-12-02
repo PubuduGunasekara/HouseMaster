@@ -4,7 +4,7 @@
     android:id="@+id/spCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_marginBottom="10dp"
     android:padding="5dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="15dp">

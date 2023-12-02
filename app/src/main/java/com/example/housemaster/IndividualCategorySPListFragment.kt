@@ -52,6 +52,7 @@ class IndividualCategorySPListFragment : Fragment(R.layout.fragment_individual_c
 
         spArrayList = arrayListOf<ServiceProviderModel>()
         val ref = firebaseFirestore.collection("users")
+            .whereEqualTo("selectedService", args.categoryTitle)
         ref.get().addOnSuccessListener { documentSnapshot ->
             if (!documentSnapshot.isEmpty) {
                 val documents = documentSnapshot.documents

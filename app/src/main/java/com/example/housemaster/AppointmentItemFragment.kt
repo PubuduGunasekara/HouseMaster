@@ -74,7 +74,7 @@ class AppointmentItemFragment : Fragment(R.layout.fragment_appointment_item) {
                 if (snapshot != null && snapshot.exists()) {
                     // Document exists, retrieve data and update TextView
                     val documentData = snapshot.data
-                    val documentText = documentData?.get("your_field_name")?.toString()
+                   // val documentText = documentData?.get("your_field_name")?.toString()
                     aptSPId = documentData?.get("ServiceProviderId").toString()
                     var spName = documentData?.get("ServiceProviderName").toString()
                     var spCategory = documentData?.get("ServiceCategory").toString()

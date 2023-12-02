@@ -136,10 +136,7 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
 
 
 
-        serviceItemBinding.btnBookApt.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
-            findNavController().navigate(action)
-        }
+
 
 
     }
@@ -199,7 +196,7 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
                 }*/
                 val services = ServiceItemTypeModel(
                     dataArray.toString(),
-                    dataArray.toString(),
+                    "Full Cleaning",
                     300.00,
                 )
                 serviceTypeArrayList.add(services)

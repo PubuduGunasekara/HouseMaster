@@ -6,8 +6,10 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="40dp"
-    android:paddingBottom="0dp"
+    android:paddingBottom="40dp"
+    android:paddingTop="40dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="20dp"
     tools:context=".ProfileFragment">
 
     <LinearLayout
@@ -302,6 +304,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/rounded_corner_btn"
             android:insetTop="0dp"
             android:insetBottom="0dp"
