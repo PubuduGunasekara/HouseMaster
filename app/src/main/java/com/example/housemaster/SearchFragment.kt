@@ -60,10 +60,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
                     searchCategoryRecyclerViewAdapter!!.notifyDataSetChanged()
 
-                    var adapter = ServiceCategoryAdapter(categoryList)
+                    var adapter = SearchCategoryAdapter(categoryList)
                     recyclerView!!.adapter = adapter
                     adapter.setOnItemClickListener(object :
-                        ServiceCategoryAdapter.onItemClickListener {
+                        SearchCategoryAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
                             val categoryId = categoryList[position].categoryId
                             val categoryTitle = categoryList[position].categoryName

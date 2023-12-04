@@ -26,7 +26,7 @@
             android:padding="5dp"
             android:text="Movie Name"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="normal" />
 
 

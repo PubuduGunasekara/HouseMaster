@@ -13,6 +13,7 @@ import com.example.housemaster.databinding.FragmentHomeBinding
 import com.example.housemaster.databinding.FragmentLoginBinding
 import com.example.housemaster.databinding.FragmentReviewBeforeConfirmAppBinding
 import com.example.housemaster.databinding.FragmentWelcomeBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -118,7 +119,14 @@ class ReviewBeforeConAppFragment : Fragment(R.layout.fragment_review_before_conf
 
             dbDataRetreive.collection("appointments").document().set(apointmentMap)
                 .addOnSuccessListener {
-                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
+                    MaterialAlertDialogBuilder(requireContext()).setTitle("Success")
+                        .setCancelable(false)
+                        .setMessage("Save changes successfully")
+                        .setPositiveButton("Done") { dialog_, which ->
+                            val action =
+                                ReviewBeforeConAppFragmentDirections.actionReviewBeforeConAppFragmentToHomeFragment()
+                            findNavController().navigate(action)
+                        }.show()
                 }
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), "Failed", Toast.LENGTH_LONG).show()

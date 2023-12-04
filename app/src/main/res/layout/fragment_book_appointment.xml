@@ -3,39 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="40dp"
-    android:paddingTop="40dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="20dp"
+
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="40dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="40dp"
         tools:context=".BookAppointmentFragment">
 
-       <!-- <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill_horizontal"
-            android:orientation="horizontal">>
+        <!-- <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_gravity="fill_horizontal"
+             android:orientation="horizontal">>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="left"
-                android:text="@string/apmtServiceType"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:gravity="left"
+                 android:text="@string/apmtServiceType"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/aptServiceType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp" />
-        </LinearLayout>-->
+             <com.google.android.material.materialswitch.MaterialSwitch
+                 android:id="@+id/aptServiceType"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:layout_marginLeft="15dp" />
+         </LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"

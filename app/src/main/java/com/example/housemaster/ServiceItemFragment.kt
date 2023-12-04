@@ -135,10 +135,6 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
         getServiceTypeData()
 
 
-
-
-
-
     }
 
     private fun getServiceTypeData() {
@@ -149,18 +145,176 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
 
         serviceTypeArrayList = arrayListOf<ServiceItemTypeModel>()
 
-        val ref = firebaseFirestore.collection("services").document("admin@gmail.com")
+        val ref = firebaseFirestore.collection("services").document(args.serviceItemId)
 
         ref.get().addOnSuccessListener { documentSnapshot ->
 
             if (documentSnapshot.exists()) {
 
-                val dataArray = documentSnapshot.get("myServices") as? ArrayList<String>
+                val dataArray = documentSnapshot.get("myServices") as? ArrayList<Any>
+                /*     Toast.makeText(
+                         requireContext(),
+                         dataArray?.get(0)?.toString() ?: "",
+                         Toast.LENGTH_LONG
+                     ).show()
+     */
+                if (dataArray != null) {
 
-                /* dataArray?.forEach {
-                     Toast.makeText(requireContext(), it[0].toString(), Toast.LENGTH_LONG)
-                         .show()
-                 }*/
+                    for (item in dataArray.indices) {
+
+                        val dataArray2 = dataArray[item] as HashMap<*, *>
+
+                        val services = ServiceItemTypeModel(
+                            dataArray2["price"].toString(),
+                            dataArray2["serviceName"].toString(),
+                            dataArray2["price"].toString().toDouble(),
+                        )
+                        serviceTypeArrayList.add(services)
+
+
+                        /*   if (dataArray2 != null) {
+                               for (item2 in dataArray2.indices) {
+                                   Toast.makeText(
+                                       requireContext(),
+                                       dataArray2[item2].toString(),
+                                       Toast.LENGTH_LONG
+                                   ).show()
+                               }
+                           }
+   */
+                        /*val item: Map<String, String>? = null
+                         if (item != null) {
+                             for (key in item.keys) {
+                                 // Do something with the extracted values
+                                 Toast.makeText(
+                                     requireContext(),
+                                     item[key] ?: "Hello",
+                                     Toast.LENGTH_LONG
+                                 ).show()
+                             }
+                         } else {
+                             // Do something with the extracted values
+                             Toast.makeText(
+                                 requireContext(),
+                                 "Hello",
+                                 Toast.LENGTH_LONG
+                             ).show()
+                         }*/
+
+                    }
+                }
+
+
+                /*   if (dataArray != null) {
+
+                       for (item in dataArray) {
+                           val item: Map<String, String>? = null
+                           if (item != null) {
+                               for (key in item.keys) {
+                                   // Do something with the extracted values
+                                   Toast.makeText(
+                                       requireContext(),
+                                       item[key] ?: "Hello",
+                                       Toast.LENGTH_LONG
+                                   ).show()
+                               }
+                           } else {
+                               // Do something with the extracted values
+                               Toast.makeText(
+                                   requireContext(),
+                                   "Hello",
+                                   Toast.LENGTH_LONG
+                               ).show()
+                           }
+
+                       }
+                   }
+   */
+                /*         if (dataArray != null) {
+
+                             for (item in dataArray) {
+                                 val item: Map<String, String>? = null
+                                 if (item != null) {
+                                     for (key in item.keys) {
+                                         // Do something with the extracted values
+                                         Toast.makeText(
+                                             requireContext(),
+                                             item[key] ?: "Hello",
+                                             Toast.LENGTH_LONG
+                                         ).show()
+                                     }
+                                 } else {
+                                     // Do something with the extracted values
+                                     Toast.makeText(
+                                         requireContext(),
+                                         "Hello",
+                                         Toast.LENGTH_LONG
+                                     ).show()
+                                 }
+
+                             }
+                         }
+         */
+
+                /*  if (dataArray != null) {
+                      for (item in dataArray) {
+
+
+                              // Do something with the extracted values
+                              Toast.makeText(
+                                  requireContext(),
+                                  item,
+                                  Toast.LENGTH_LONG
+                              ).show()
+
+
+                  //Toast.makeText(requireContext(), dataArray.toString(), Toast.LENGTH_LONG).show()
+
+
+            /*      if (dataArray != null) {
+                      for (item in dataArray) {
+                          val price = item[0]
+                          val serviceName = item[1]
+
+                              // Check for null values before using them
+                              if (price != null && serviceName != null) {
+                                  // Do something with the extracted values
+                                  Toast.makeText(
+                                      requireContext(),
+                                      "$price  $serviceName",
+                                      Toast.LENGTH_LONG
+                                  ).show()
+                              } else {
+                                  // Handle the case where either price or serviceName is null
+                                  println("Invalid data for an item: $item")
+                              }
+
+
+
+  */
+                          // Do something with the extracted values
+
+                          // Check for null values before using them
+                        /*  if (price != null && serviceName != null) {
+                              // Do something with the extracted values
+                              Toast.makeText(
+                                  requireContext(),
+                                  price.toString() + "  " + serviceName.toString(),
+                                  Toast.LENGTH_LONG
+                              )
+                                  .show()
+                          } else {
+                              // Handle the case where either price or serviceName is null
+                              println("Invalid data for an item: $item")
+                          }
+  */
+                      }
+                  }
+  */
+                /*dataArray?.forEach {
+                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG)
+                        .show()
+                }*/
 
 
                 /* dataArray?.map {
@@ -194,12 +348,7 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
 
                     }
                 }*/
-                val services = ServiceItemTypeModel(
-                    dataArray.toString(),
-                    "Full Cleaning",
-                    300.00,
-                )
-                serviceTypeArrayList.add(services)
+
 
                 var adapter = ServiceItemTypeAdapter(serviceTypeArrayList)
                 serviceTypeRecyclerView.adapter = adapter
