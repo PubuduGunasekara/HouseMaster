@@ -46,7 +46,7 @@ class AppointmentItemFragment : Fragment(R.layout.fragment_appointment_item) {
 
         super.onViewCreated(view, savedInstanceState)
         fragmentApptItemBinding = FragmentAppointmentItemBinding.bind(view)
-
+        fragmentApptItemBinding.loadingSpinner.setVisibility(View.VISIBLE);
         firebaseFirestore = FirebaseFirestore.getInstance()
         firebaseAuth = FirebaseAuth.getInstance()
         //this is just to hide ActionBar from the fragment
@@ -74,7 +74,7 @@ class AppointmentItemFragment : Fragment(R.layout.fragment_appointment_item) {
                 if (snapshot != null && snapshot.exists()) {
                     // Document exists, retrieve data and update TextView
                     val documentData = snapshot.data
-                   // val documentText = documentData?.get("your_field_name")?.toString()
+                    // val documentText = documentData?.get("your_field_name")?.toString()
                     aptSPId = documentData?.get("ServiceProviderId").toString()
                     var spName = documentData?.get("ServiceProviderName").toString()
                     var spCategory = documentData?.get("ServiceCategory").toString()
@@ -127,6 +127,7 @@ class AppointmentItemFragment : Fragment(R.layout.fragment_appointment_item) {
                     fragmentApptItemBinding.reviewBillAmount.setText(amount)
                     fragmentApptItemBinding.reviewBillHstAmount.setText(hst)
                     fragmentApptItemBinding.reviewBillTotal.setText(total)
+                    fragmentApptItemBinding.loadingSpinner.setVisibility(View.GONE);
                 } else {
                     // Document doesn't exist
 

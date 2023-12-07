@@ -6,26 +6,34 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingBottom="40dp"
-    android:paddingTop="40dp"
     android:paddingLeft="10dp"
-    android:paddingRight="20dp"
+    android:paddingTop="40dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="40dp"
     tools:context=".ProfileFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/p_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+        <ProgressBar
+            android:id="@+id/loadingSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:src="@drawable/ic_launcher_background"
-            app:shapeAppearanceOverlay="@style/Circular" />
+            android:visibility="invisible" />
 
+        <!-- <com.google.android.material.imageview.ShapeableImageView
+             android:id="@+id/p_image"
+             android:layout_width="100dp"
+             android:layout_height="100dp"
+             android:layout_gravity="center"
+             android:layout_margin="20dp"
+             android:src="@drawable/ic_launcher_background"
+             app:shapeAppearanceOverlay="@style/Circular" />
+ -->
         <LinearLayout
             android:id="@+id/profile_fName_group"
             android:layout_width="match_parent"
@@ -296,15 +304,12 @@
 
         </LinearLayout>
 
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/profile_edit_btn"
             style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            android:layout_marginBottom="20dp"
             android:background="@drawable/rounded_corner_btn"
             android:insetTop="0dp"
             android:insetBottom="0dp"

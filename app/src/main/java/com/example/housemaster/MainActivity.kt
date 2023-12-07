@@ -95,13 +95,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.termsAndConditions) {
-            val action = NavGraphDirections.actionGlobalTermsFragment()
-            navController.navigate(action)
-            true
-        } else {
-            item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
-        }
+        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

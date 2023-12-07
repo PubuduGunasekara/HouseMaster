@@ -2,11 +2,14 @@ package com.example.housemaster
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -26,6 +29,8 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
     lateinit var serviceType: Array<String>
     lateinit var servicePrice: Array<String>
     lateinit var serviceTypeId: Array<String>
+    var sTypeIdGlobal: String = ""
+    var sTypeTitleGlobal: String = ""
 
     private var serviceTypeSharedPre: String? = null
     private lateinit var sharedPreferences: SharedPreferences
@@ -45,7 +50,7 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
         //this is just to hide BottomNavBar from the fragment
         val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav)
         view.visibility = View.VISIBLE
-
+        serviceItemBinding.loadingSpinner.setVisibility(View.VISIBLE)
 
         //shared preference
         sharedPreferences = requireContext().getSharedPreferences(
@@ -61,83 +66,108 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
         serviceItemBinding.siTitle.text = args.spName
         Picasso.get().load(args.spImage).into(serviceItemBinding.siCoverImage)
 
+        serviceItemBinding.loadingSpinner.setVisibility(View.GONE)
 
-        serviceType = arrayOf(
-            "id1",
-            "hello2",
-            "hello3",
-            "hello4",
-            "hello5",
-            "hello6",
-            "hello7",
-            "hello8",
-            "hello9",
-            "hello10",
-            "hello11",
-            "hello12",
-            "hello13",
-            "hello14",
-            "hello15",
-            "hello16",
-            "hello17",
-            "hello18",
-            "hello19",
-            "hello20",
-        )
+        /*
+                serviceType = arrayOf(
+                    "id1",
+                    "hello2",
+                    "hello3",
+                    "hello4",
+                    "hello5",
+                    "hello6",
+                    "hello7",
+                    "hello8",
+                    "hello9",
+                    "hello10",
+                    "hello11",
+                    "hello12",
+                    "hello13",
+                    "hello14",
+                    "hello15",
+                    "hello16",
+                    "hello17",
+                    "hello18",
+                    "hello19",
+                    "hello20",
+                )
 
-        servicePrice = arrayOf(
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-            "hello1",
-        )
+                servicePrice = arrayOf(
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                    "hello1",
+                )
 
-        serviceTypeId = arrayOf(
-            "id1",
-            "hello2",
-            "hello3",
-            "hello4",
-            "hello5",
-            "hello6",
-            "hello7",
-            "hello8",
-            "hello9",
-            "hello10",
-            "hello11",
-            "hello12",
-            "hello13",
-            "hello14",
-            "hello15",
-            "hello16",
-            "hello17",
-            "hello18",
-            "hello19",
-            "hello20",
-        )
+                serviceTypeId = arrayOf(
+                    "id1",
+                    "hello2",
+                    "hello3",
+                    "hello4",
+                    "hello5",
+                    "hello6",
+                    "hello7",
+                    "hello8",
+                    "hello9",
+                    "hello10",
+                    "hello11",
+                    "hello12",
+                    "hello13",
+                    "hello14",
+                    "hello15",
+                    "hello16",
+                    "hello17",
+                    "hello18",
+                    "hello19",
+                    "hello20",
+                )
 
-
+        */
         getServiceTypeData()
+
+        serviceItemBinding.btnContinue.setOnClickListener {
+
+            if (sTypeIdGlobal.isNotEmpty() && sTypeIdGlobal != "" && sTypeTitleGlobal != "" && sTypeTitleGlobal.isNotEmpty()) {
+                navigateToNextPage()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Select a service to continue",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+        }
 
 
     }
 
+    private fun navigateToNextPage() {
+        val action =
+            ServiceItemFragmentDirections.actionServiceItemFragmentToBookAppointmentFragment(
+                sTypeIdGlobal, sTypeTitleGlobal
+            )
+        findNavController().navigate(action)
+    }
+
     private fun getServiceTypeData() {
+        serviceItemBinding.loadingSpinner.setVisibility(View.VISIBLE)
         serviceTypeRecyclerView = serviceItemBinding.siServiceTypesRV
         serviceTypeRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -152,12 +182,7 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
             if (documentSnapshot.exists()) {
 
                 val dataArray = documentSnapshot.get("myServices") as? ArrayList<Any>
-                /*     Toast.makeText(
-                         requireContext(),
-                         dataArray?.get(0)?.toString() ?: "",
-                         Toast.LENGTH_LONG
-                     ).show()
-     */
+
                 if (dataArray != null) {
 
                     for (item in dataArray.indices) {
@@ -172,189 +197,16 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
                         serviceTypeArrayList.add(services)
 
 
-                        /*   if (dataArray2 != null) {
-                               for (item2 in dataArray2.indices) {
-                                   Toast.makeText(
-                                       requireContext(),
-                                       dataArray2[item2].toString(),
-                                       Toast.LENGTH_LONG
-                                   ).show()
-                               }
-                           }
-   */
-                        /*val item: Map<String, String>? = null
-                         if (item != null) {
-                             for (key in item.keys) {
-                                 // Do something with the extracted values
-                                 Toast.makeText(
-                                     requireContext(),
-                                     item[key] ?: "Hello",
-                                     Toast.LENGTH_LONG
-                                 ).show()
-                             }
-                         } else {
-                             // Do something with the extracted values
-                             Toast.makeText(
-                                 requireContext(),
-                                 "Hello",
-                                 Toast.LENGTH_LONG
-                             ).show()
-                         }*/
-
                     }
                 }
 
 
-                /*   if (dataArray != null) {
-
-                       for (item in dataArray) {
-                           val item: Map<String, String>? = null
-                           if (item != null) {
-                               for (key in item.keys) {
-                                   // Do something with the extracted values
-                                   Toast.makeText(
-                                       requireContext(),
-                                       item[key] ?: "Hello",
-                                       Toast.LENGTH_LONG
-                                   ).show()
-                               }
-                           } else {
-                               // Do something with the extracted values
-                               Toast.makeText(
-                                   requireContext(),
-                                   "Hello",
-                                   Toast.LENGTH_LONG
-                               ).show()
-                           }
-
-                       }
-                   }
-   */
-                /*         if (dataArray != null) {
-
-                             for (item in dataArray) {
-                                 val item: Map<String, String>? = null
-                                 if (item != null) {
-                                     for (key in item.keys) {
-                                         // Do something with the extracted values
-                                         Toast.makeText(
-                                             requireContext(),
-                                             item[key] ?: "Hello",
-                                             Toast.LENGTH_LONG
-                                         ).show()
-                                     }
-                                 } else {
-                                     // Do something with the extracted values
-                                     Toast.makeText(
-                                         requireContext(),
-                                         "Hello",
-                                         Toast.LENGTH_LONG
-                                     ).show()
-                                 }
-
-                             }
-                         }
-         */
-
-                /*  if (dataArray != null) {
-                      for (item in dataArray) {
-
-
-                              // Do something with the extracted values
-                              Toast.makeText(
-                                  requireContext(),
-                                  item,
-                                  Toast.LENGTH_LONG
-                              ).show()
-
-
-                  //Toast.makeText(requireContext(), dataArray.toString(), Toast.LENGTH_LONG).show()
-
-
-            /*      if (dataArray != null) {
-                      for (item in dataArray) {
-                          val price = item[0]
-                          val serviceName = item[1]
-
-                              // Check for null values before using them
-                              if (price != null && serviceName != null) {
-                                  // Do something with the extracted values
-                                  Toast.makeText(
-                                      requireContext(),
-                                      "$price  $serviceName",
-                                      Toast.LENGTH_LONG
-                                  ).show()
-                              } else {
-                                  // Handle the case where either price or serviceName is null
-                                  println("Invalid data for an item: $item")
-                              }
-
-
-
-  */
-                          // Do something with the extracted values
-
-                          // Check for null values before using them
-                        /*  if (price != null && serviceName != null) {
-                              // Do something with the extracted values
-                              Toast.makeText(
-                                  requireContext(),
-                                  price.toString() + "  " + serviceName.toString(),
-                                  Toast.LENGTH_LONG
-                              )
-                                  .show()
-                          } else {
-                              // Handle the case where either price or serviceName is null
-                              println("Invalid data for an item: $item")
-                          }
-  */
-                      }
-                  }
-  */
-                /*dataArray?.forEach {
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG)
-                        .show()
-                }*/
-
-
-                /* dataArray?.map {
-                     Toast.makeText(requireContext(), it[0].toString(), Toast.LENGTH_LONG)
-                         .show()
-                 }*/
-                /* val servicesList = dataArray?.map {
-                     ServiceItemTypeModel(
-                         "id", it[1].toString(),
-                         it[0].toString()
-                     )
-
-
-                 }*/
-
-                /*if (dataArray != null) {
-                    for (service in dataArray) {
-                        dataArray?.map {
-                            Toast.makeText(requireContext(), it[0], Toast.LENGTH_LONG)
-                                .show()
-                        }
-                    }
-                }*/
-
-                /*if (dataArray != null) {
-                    for (data in dataArray) {
-                        val price = data["price"]
-                        val serviceType = data["serviceName"]
-                        Toast.makeText(requireContext(), price.toString(), Toast.LENGTH_LONG)
-                            .show()
-
-                    }
-                }*/
-
-
                 var adapter = ServiceItemTypeAdapter(serviceTypeArrayList)
                 serviceTypeRecyclerView.adapter = adapter
+                serviceItemBinding.loadingSpinner.setVisibility(View.GONE)
                 adapter.setOnItemClickListener(object :
                     ServiceItemTypeAdapter.onItemClickListener {
-                    override fun onItemClick(position: Int) {
+                    override fun onItemClick(position: Int, clickedView: View) {
                         val sTypeId = serviceTypeArrayList[position].serviceTypeId
                         val sTypeTitle = serviceTypeArrayList[position].typeTitle
                         val sTypePrice = serviceTypeArrayList[position].typePrice
@@ -375,12 +227,17 @@ class ServiceItemFragment : Fragment(R.layout.fragment_service_item) {
                             sTypePrice.toFloat()
                         )
                             .apply()
+                        if (sTypeTitle != "" && sTypeId != "") {
+                            sTypeTitleGlobal = sTypeTitle
+                            sTypeIdGlobal = sTypeId
 
-                        val action =
-                            ServiceItemFragmentDirections.actionServiceItemFragmentToBookAppointmentFragment(
-                                sTypeId, sTypeTitle
-                            )
-                        findNavController().navigate(action)
+
+                            //clickedView.
+
+                            //serviceItemBinding.btnContinue.setText("$sTypeTitle")
+                        }
+
+
                     }
                 }
                 )

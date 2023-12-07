@@ -5,15 +5,6 @@
         android:id="@+id/profileFragment"
         android:title="Profile"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/termsAndConditions"
-        android:menuCategory="secondary"
-        android:title="Terms &amp; Conditions"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/settingsFragment"
-        android:menuCategory="secondary"
-        android:title="Settings"
-        app:showAsAction="never" />
+
 
 </menu>

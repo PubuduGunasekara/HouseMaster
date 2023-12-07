@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:orientation="vertical">
 
@@ -71,6 +72,20 @@
             android:text="@string/apmtTimeSlotText"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
+
+        <TextView
+            android:id="@+id/timeSlotSelectDateFalse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/selectDateBefore"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/grey"
+            android:textSize="15sp" />
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bookAptTimeSlotsRV"
             android:layout_width="wrap_content"
@@ -79,15 +94,18 @@
             android:layout_marginTop="20dp"
             android:clickable="true" />
 
-        <Button
-
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_checkout"
-            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="Continue" />
+            android:layout_marginTop="25dp"
+            android:background="@drawable/rounded_corner_btn"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:icon="@drawable/baseline_navigate_next_24"
+            app:iconGravity="textEnd"
+            android:text="@string/btnContinue" />
 
     </LinearLayout>
 </ScrollView>

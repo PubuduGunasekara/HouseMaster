@@ -29,13 +29,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var userDetails: UserProfileModel? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         firebaseAuth = FirebaseAuth.getInstance()
+
         if (firebaseAuth.currentUser == null) {
             val action = HomeFragmentDirections.actionHomeFragmentToSignInFragment()
             findNavController().navigate(action)
         }
         super.onViewCreated(view, savedInstanceState)
         profileBinding = FragmentProfileBinding.bind(view)
-
+        profileBinding.loadingSpinner.setVisibility(View.VISIBLE);
 
         profileBinding.profileEditBtn.setOnClickListener {
             val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
@@ -94,9 +95,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 profileBinding.suiteAptNo.text = suiteAptNo
                 profileBinding.province.text = province
 
-
+                profileBinding.loadingSpinner.setVisibility(View.GONE);
             } else {
-                profileBinding.pImage.visibility = View.GONE
+                // profileBinding.pImage.visibility = View.GONE
                 profileBinding.profileFName.visibility = View.GONE
                 profileBinding.profileLName.visibility = View.GONE
                 profileBinding.profileEmail.visibility = View.GONE

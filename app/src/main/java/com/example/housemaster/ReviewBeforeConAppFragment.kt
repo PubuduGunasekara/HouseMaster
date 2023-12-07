@@ -121,7 +121,7 @@ class ReviewBeforeConAppFragment : Fragment(R.layout.fragment_review_before_conf
                 .addOnSuccessListener {
                     MaterialAlertDialogBuilder(requireContext()).setTitle("Success")
                         .setCancelable(false)
-                        .setMessage("Save changes successfully")
+                        .setMessage("You have successfully booked the appointment")
                         .setPositiveButton("Done") { dialog_, which ->
                             val action =
                                 ReviewBeforeConAppFragmentDirections.actionReviewBeforeConAppFragmentToHomeFragment()
@@ -135,6 +135,14 @@ class ReviewBeforeConAppFragment : Fragment(R.layout.fragment_review_before_conf
             /*val action = WelcomeFragmentDirections.actionWelcomeFragmentToHomeFragment()
                  findNavController().navigate(action)*/
         }
+
+        //change billing address
+        /* reviewBeforeConfirmAppBinding.epChangeBillingAddress.setOnClickListener {
+             val action =
+                 ReviewBeforeConAppFragmentDirections.actionReviewBeforeConAppFragmentToAddCardsAndAccountsFromRBCFragment()
+             findNavController().navigate(action)
+         }
+ */
 
     }
 
@@ -212,7 +220,9 @@ class ReviewBeforeConAppFragment : Fragment(R.layout.fragment_review_before_conf
                     var expMnth = documentData?.get("expMonth").toString()
                     var expYear = documentData?.get("expYear").toString()
 
-                    reviewBeforeConfirmAppBinding.rbcCardNumber.setText(cardNumber)
+                    val lastFourDigits = cardNumber.takeLast(4)
+                    val cardNumToShow = "**** **** **** $lastFourDigits"
+                    reviewBeforeConfirmAppBinding.rbcCardNumber.setText(cardNumToShow)
                     if (expMnth == "January") {
                         expMnth = "01"
                     } else if (expMnth == "February") {

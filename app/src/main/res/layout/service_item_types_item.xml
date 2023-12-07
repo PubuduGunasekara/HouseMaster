@@ -11,11 +11,14 @@
 
 
     <LinearLayout
+        android:id="@+id/itemViewGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/misty_blue"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/blue_grey"
         android:gravity="fill"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
 
         <TextView
@@ -25,42 +28,47 @@
             android:layout_gravity="start"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:padding="5dp"
             android:text="Movie Name"
             android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/siTypePriceCAD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:paddingRight="0dp"
-            android:paddingBottom="5dp"
-            android:text="$"
-            android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="normal" />
 
-        <TextView
-            android:id="@+id/siTypePrice"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="0dp"
-            android:paddingTop="5dp"
-            android:paddingRight="5dp"
-            android:paddingBottom="5dp"
-            android:text="Movie Name"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="normal" />
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/siTypePriceCAD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="5dp"
+                android:text="$"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/siTypePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="0dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
+                android:text="Movie Name"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+        </LinearLayout>
     </LinearLayout>
 
 

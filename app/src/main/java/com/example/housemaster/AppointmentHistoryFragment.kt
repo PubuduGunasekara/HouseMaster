@@ -122,7 +122,7 @@ class AppointmentHistoryFragment : Fragment(R.layout.fragment_appointment_histor
                             sptData.id,
                             sptData["ServiceProviderName"].toString(),
                             sptData["apptDate"].toString(),
-                            sptData["ServiceProviderName"].toString(),
+                            sptData["ServiceCategory"].toString(),
                         )
                         aptListPrev.add(data)
 

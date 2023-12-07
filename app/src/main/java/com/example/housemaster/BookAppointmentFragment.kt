@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +27,7 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
     private lateinit var bookAppointmentBinding: FragmentBookAppointmentBinding
     private lateinit var firebaseFirestore: FirebaseFirestore
     private val args: BookAppointmentFragmentArgs by navArgs()
-    lateinit var timeSlot: Array<String>
+    var bookedTimeSlots: Array<String> = arrayOf()
     private var TimeSlotRecyclerViewAdapter: BookAppointmentTimeSlotAdapter? = null
     private var bookAppTimeSlot = ""
     private lateinit var sharedPreferences: SharedPreferences
@@ -35,6 +36,7 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
 
     private lateinit var timeSlotRecyclerView: RecyclerView
     private var timeSLotArrayList = ArrayList<BookAppointmentTimeSlotModel>()
+    private var bookedTimeSLotArrayList = ArrayList<BookAppointmentTimeSlotModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         firebaseFirestore = FirebaseFirestore.getInstance()
@@ -43,44 +45,15 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
             "com.example.housemaster",
             Context.MODE_PRIVATE
         )
+
         super.onViewCreated(view, savedInstanceState)
         bookAppointmentBinding = FragmentBookAppointmentBinding.bind(view)
-
+        bookAppointmentBinding.timeSlotSelectDateFalse.visibility = View.VISIBLE
         //this is just to hide ActionBar from the fragment
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
         //this is just to hide BottomNavBar from the fragment
         val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav)
         view.visibility = View.VISIBLE
-
-
-        /* timeSlot = arrayOf(
-             "9AM - 10AM",
-             "10AM - 11AM",
-             "11AM - 12PM",
-             "12PM - 01PM",
-             "01PM - 02PM",
-             "02PM - 03PM",
-             "03PM - 04PM",
-             "04PM - 05PM",
-
-             )*/
-
-
-
-
-
-        //getServiceTypeData()
-
-
-        //switch
-        /*bookAppointmentBinding.aptServiceType.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-            // do something, the isChecked will be
-            // true if the switch is in the On position
-            if (isChecked) {
-                isHomeServiceEnable = true
-
-            }
-        })*/
 
 
 //date time
@@ -89,25 +62,9 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
             myCalender.set(Calendar.YEAR, year)
             myCalender.set(Calendar.MONTH, month)
             myCalender.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-            // Check if the selected date is before the current date
-            /* if (myCalender.before(Calendar.getInstance())) {
-                 // If it's before the current date, show an error message or take appropriate action
-                 // For example, you can show a Toast message
-                 Toast.makeText(
-                     requireContext(),
-                     "Please select a future date",
-                     Toast.LENGTH_SHORT
-                 ).show()
-
-                 // Reset the Calendar instance to the current date
-                 myCalender = Calendar.getInstance()
-             } else {
-                 // If it's a valid date, update the label or perform any other actions
-                 updateLable(myCalender)
-             }*/
+            Log.d("from date picker ", "Current value:  " + Calendar.MONTH)
             updateLable(myCalender)
-            //updateLable(myCalender)
+
         }
 //date picker
         bookAppointmentBinding.aptServiceDate.setOnClickListener {
@@ -127,25 +84,13 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
             datePickerDialog.show()
 
         }
-
-        timeSlotRecyclerView = bookAppointmentBinding.bookAptTimeSlotsRV
-        TimeSlotRecyclerViewAdapter = BookAppointmentTimeSlotAdapter(timeSLotArrayList)
-        val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(requireContext(), 2)
-        timeSlotRecyclerView!!.layoutManager = layoutManager
-        timeSlotRecyclerView!!.adapter = TimeSlotRecyclerViewAdapter
-
-        getServiceTimingData()
-
-
-        //continue buton
+        //getServiceTimingData()
+        //continue button
         bookAppointmentBinding.btnCheckout.setOnClickListener {
-            if (bookAppTimeSlot.isNotEmpty() || bookAppointmentBinding.aptServiceDate.text.toString() != "Select Date") {
-                Toast.makeText(
-                    requireContext(),
-                    "" + isHomeServiceEnable + "" + bookAppTimeSlot + "" + bookAppointmentBinding.aptServiceDate.text.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
+            if (bookAppTimeSlot.isNotEmpty() && bookAppTimeSlot != "" && bookAppointmentBinding.aptServiceDate.text.toString() != "Select Date") {
+
                 var date = bookAppointmentBinding.aptServiceDate.text.toString()
+
                 val action =
                     BookAppointmentFragmentDirections.actionBookAppointmentFragmentToReviewBeforeConAppFragment(
                         bookAppTimeSlot,
@@ -158,41 +103,62 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Select Mandatory Fields to continue",
+                    "Select Date and Time Slot to continue",
                     Toast.LENGTH_LONG
                 ).show()
             }
         }
 
 
-
-
     }
 
 
     private fun updateLable(myCalender: Calendar) {
-        val myFormat = "dd-mm-yyyy"
+        val myFormat = "dd-MM-yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.CANADA)
+        Log.d("time before set ", "Current value:  " + sdf.format(myCalender.time))
+        getRespectiveDayFromTheDate(sdf.format(myCalender.time))
         bookAppointmentBinding.aptServiceDate.setText(sdf.format(myCalender.time))
 
     }
 
+    private fun getRespectiveDayFromTheDate(format: String) {
 
-    /*  private fun getServiceTypeData() {
-          for (i in timeSlot.indices) {
-              val data = BookAppointmentTimeSlotModel(timeSlot[i])
-              timeSLotArrayList.add(data)
-          }
 
-      }
-  */
+        Log.d("time after set ", "Current value:  " + format)
+        var dateSelected = format
 
-    private fun getServiceTimingData() {
+        // Define the date format
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+
+        try {
+            // Parse the date string
+            val date = dateFormat.parse(dateSelected)
+
+            // Format the date to get the day name
+            val dayName = SimpleDateFormat("EEEE", Locale.getDefault()).format(date)
+
+            // Print the day name
+            Log.d("day name", "Current value:  " + dayName)
+            bookAppointmentBinding.timeSlotSelectDateFalse.visibility = View.GONE
+            getServiceTimingData(dayName, dateSelected)
+        } catch (e: Exception) {
+            println("Error parsing the date: ${e.message}")
+        }
+    }
+
+    private fun getServiceTimingData(dayName: String, dateSelected: String) {
+
+        timeSlotRecyclerView = bookAppointmentBinding.bookAptTimeSlotsRV
+        bookedTimeSLotArrayList.clear()
+        val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(requireContext(), 2)
+        timeSlotRecyclerView!!.layoutManager = layoutManager
 
         serviceProviderIdSharedPre =
             sharedPreferences.getString("service_provider_id", "").toString()
         timeSLotArrayList = arrayListOf<BookAppointmentTimeSlotModel>()
 
+        timeSLotArrayList.clear()
         val ref =
             firebaseFirestore.collection("timings").document(serviceProviderIdSharedPre)
 
@@ -202,7 +168,7 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
 
                 val dataArray = documentSnapshot.get("timings") as HashMap<*, *>
 
-                val value = dataArray["Friday"] as ArrayList<Any>
+                val value = dataArray[dayName] as ArrayList<Any>
 
 
                 if (value != null) {
@@ -239,7 +205,7 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
                         }
 
                         for (i in startHour..endHour - 1) {
-                            val timeSlot = "" + i + " - " + (i + 1)
+                            val timeSlot = "" + i + ".00 - " + (i + 1) + ".00"
 
                             val services = BookAppointmentTimeSlotModel(
                                 timeSlot
@@ -313,7 +279,7 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
                         }
 
                         for (i in startHour..endHour - 1) {
-                            val timeSlot = "" + i + " - " + (i + 1)
+                            val timeSlot = "" + i + ".00 - " + (i + 1) + ".00"
 
                             val services = BookAppointmentTimeSlotModel(
                                 timeSlot
@@ -363,7 +329,7 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
 
 
                         for (i in startHour..endHour - 1) {
-                            val timeSlot = "" + i + " - " + (i + 1)
+                            val timeSlot = "" + i + ".00 - " + (i + 1) + ".00"
 
                             val services = BookAppointmentTimeSlotModel(
                                 timeSlot
@@ -379,23 +345,91 @@ class BookAppointmentFragment : Fragment(R.layout.fragment_book_appointment) {
 
                 }
 
-                var adapter = BookAppointmentTimeSlotAdapter(timeSLotArrayList)
-                timeSlotRecyclerView.adapter = adapter
-                adapter.setOnItemClickListener(object :
-                    BookAppointmentTimeSlotAdapter.onItemClickListener {
-                    override fun onItemClick(position: Int) {
-                        bookAppTimeSlot = timeSLotArrayList[position].timeSlotTitle
+//getting the time slots from appointments
 
+                val ref =
+                    firebaseFirestore.collection("appointments")
+                        .whereEqualTo("apptDate", dateSelected)
+
+                ref.get().addOnSuccessListener { documentSnapshot ->
+                    bookedTimeSlots = emptyArray()
+                    if (!documentSnapshot.isEmpty) {
+                        val documents = documentSnapshot.documents
+                        for (category in documents) {
+                            bookedTimeSlots = bookedTimeSlots.plus(category["aptTime"].toString())
+
+                        }
                     }
-                }
-                )
 
-                /*  val services = BookAppointmentTimeSlotModel(
-                        dataArray2["price"].toString(),
-                        dataArray2["serviceName"].toString(),
-                        dataArray2["price"].toString().toDouble(),
-                    )
-                    timeSLotArrayList.add(services)*/
+                    // Log.d("booked time slot string array", "Current value:  $timeSLotArrayList")
+                    for (item in bookedTimeSlots.indices) {
+                        val services = BookAppointmentTimeSlotModel(
+                            bookedTimeSlots[item]
+                        )
+                        bookedTimeSLotArrayList.add(services)
+                    }
+
+                    bookedTimeSlots = emptyArray()
+                    //Log.d("booked time slot List", "Current value:  $timeSLotArrayList")
+                    // Log.d("after remove things", "Current value:  $timeSLotArrayList")
+                    /*val newArray =
+                        convertedBookTimeArrayList.toSet().subtract(timeSLotArrayList.toSet())
+                            .toTypedArray()*/
+
+
+                    /* Log.d(
+                         "booked time slots before changing",
+                         "Current value:  $bookedTimeSLotArrayList"
+                     )*/
+                    // Log.d("time slots before changing", "Current value:  $timeSLotArrayList")
+
+                    if (timeSLotArrayList.isNotEmpty()) {
+                        timeSLotArrayList.removeAll(bookedTimeSLotArrayList.toSet())
+                    }
+
+                    bookedTimeSLotArrayList.clear()
+                    //Log.d("after remove things", "Current value:  $timeSLotArrayList")
+
+                    if (timeSLotArrayList.isEmpty()) {
+                        bookAppointmentBinding.timeSlotSelectDateFalse.setText("Sorry!.No available time slots found, Please try selecting a new date.")
+                        bookAppointmentBinding.timeSlotSelectDateFalse.visibility = View.VISIBLE
+                        timeSLotArrayList.clear()
+                        var adapter = BookAppointmentTimeSlotAdapter(timeSLotArrayList)
+                        timeSlotRecyclerView.adapter = adapter
+                        TimeSlotRecyclerViewAdapter?.updateItems(timeSLotArrayList)
+                    } else {
+                        bookAppointmentBinding.timeSlotSelectDateFalse.visibility = View.GONE
+                        var adapter = BookAppointmentTimeSlotAdapter(timeSLotArrayList)
+                        timeSlotRecyclerView.adapter = adapter
+                        TimeSlotRecyclerViewAdapter?.updateItems(timeSLotArrayList)
+                        adapter.setOnItemClickListener(object :
+                            BookAppointmentTimeSlotAdapter.onItemClickListener {
+                            override fun onItemClick(position: Int, clickedView: View) {
+                                bookAppTimeSlot = timeSLotArrayList[position].timeSlotTitle
+
+                                //bookAppointmentBinding.btnCheckout.setText(bookAppTimeSlot)
+                            }
+                        }
+                        )
+                    }
+
+
+                }.addOnFailureListener {
+
+                    Log.e("firebase", "Error getting data", it)
+                }
+
+
+                /*    var adapter = BookAppointmentTimeSlotAdapter(timeSLotArrayList)
+                    timeSlotRecyclerView.adapter = adapter
+                    adapter.setOnItemClickListener(object :
+                        BookAppointmentTimeSlotAdapter.onItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            bookAppTimeSlot = timeSLotArrayList[position].timeSlotTitle
+
+                        }
+                    }
+                    )*/
 
 
             }

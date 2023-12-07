@@ -14,27 +14,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="vertical">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ep_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:src="@drawable/ic_launcher_background"
-            app:shapeAppearanceOverlay="@style/Circular" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/cImage_ep"
-            android:layout_width="match_parent"
+        <ProgressBar
+            android:id="@+id/loadingSpinner"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/eProfile_changeImage"
-            android:textColor="@color/misty_blue_dark" />
+            android:visibility="invisible" />
+
+        <!-- <com.google.android.material.imageview.ShapeableImageView
+             android:id="@+id/ep_image"
+             android:layout_width="100dp"
+             android:layout_height="100dp"
+             android:layout_gravity="center"
+             android:layout_margin="20dp"
+             android:src="@drawable/ic_launcher_background"
+             app:shapeAppearanceOverlay="@style/Circular" />
+
+         <com.google.android.material.textview.MaterialTextView
+             android:id="@+id/cImage_ep"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:gravity="center"
+             android:text="@string/eProfile_changeImage"
+             android:textColor="@color/misty_blue_dark" />-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/eprofile_fname_til"
@@ -163,6 +172,7 @@
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/eprofile_city_til"
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
@@ -183,6 +193,7 @@
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/eprofile_province_til"
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
@@ -195,15 +206,16 @@
             app:boxCornerRadiusTopStart="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:enabled="false"
                 android:id="@+id/eprofile_province"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:hint="@string/eProfileProvince"
                 android:inputType="text"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/eprofile_postalCode_til"
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"

@@ -48,6 +48,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         super.onViewCreated(view, savedInstanceState)
         homeBinding = FragmentHomeBinding.bind(view)
+        homeBinding.loadingSpinner.setVisibility(View.VISIBLE);
+
 
         getCategoryData()
 
@@ -59,11 +61,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         //this is just to hide BottomNavBar from the fragment
         val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav)
         view.visibility = View.VISIBLE
-
-        homeBinding.buttonLogin.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
-            findNavController().navigate(action)
-        }
 
 
     }
@@ -91,6 +88,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                     var adapter = ServiceCategoryAdapter(categoryArrayList)
                     categoryRecyclerView.adapter = adapter
+                    homeBinding.loadingSpinner.setVisibility(View.GONE);
                     adapter.setOnItemClickListener(object :
                         ServiceCategoryAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
@@ -144,6 +142,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                     var adapter2 = ServiceProviderAdapter(spArrayList)
                     spRecyclerView.adapter = adapter2
+                    homeBinding.loadingSpinner.setVisibility(View.GONE);
                     adapter2.setOnItemClickListener(object :
                         ServiceProviderAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
@@ -154,7 +153,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             val spImage = spArrayList[position].spImage
                             val action =
                                 HomeFragmentDirections.actionHomeFragmentToServiceItemFragment(
-                                    spId, spCategory, spName, spRatings,spImage
+                                    spId, spCategory, spName, spRatings, spImage
                                 )
                             findNavController().navigate(action)
                         }
