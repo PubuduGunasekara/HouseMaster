@@ -1,3 +1,118 @@
 <resources>
     <string name="app_name">HouseMaster</string>
+
+    <string name="emailSignIn">Email</string>
+    <string name="passwordSignIn">Password</string>
+    <string name="btnSignIn">Sign In</string>
+    <string name="cpasswordSignIn">Confirm Password</string>
+    <string name="btnSignUp">Sign Up</string>
+    <string name="cpasswordSignUp">Confirm Password</string>
+    <string name="passwordSignUp">Password</string>
+    <string name="emailSignUp">Email</string>
+    <string name="emailForgotPassword">Enter your email</string>
+    <string name="btnSendEmail">Send Reset Link</string>
+    <string name="btnFPDMoveSignIn">Sign In</string>
+    <string name="forgot_password_string">Forgot Password?</string>
+    <string name="btn_create_an_account">Create an Account</string>
+    <string name="fNameSignUp">First Name</string>
+    <string name="lNameSignUp">Last Name</string>
+    <string name="btnSignInInstead">Sign In Instead</string>
+    <string name="already_have_an_account_sign_in_instead">Already have an account? Sign In instead</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_edit">Edit Profile</string>
+    <string name="btneProfile">Save Changes</string>
+    <string name="phoneEProfile">Phone Number</string>
+    <string name="eProfileStreetAddress">Street Address</string>
+    <string name="eProfileSuitNumber">Suite/Apt # </string>
+    <string name="eProfile_changePassword">Change your password</string>
+    <string name="eProfile_changeImage">Change Image</string>
+    <string name="btnepChangePW">Change Password</string>
+    <string name="epCurrentPassword">Current Password</string>
+    <string name="ep_new_password">New Password</string>
+    <string name="ep_new_password_con">Confirm Password</string>
+    <string name="add_new_card">Add a new Card</string>
+    <string name="cardName">Name on Card</string>
+    <string name="cardNumber">Card number</string>
+    <string name="expMonth">Exp. Month</string>
+    <string name="expYear">Exp. Year</string>
+    <string name="secNumber">CVV</string>
+    <string name="addCardBtn">Add Card</string>
+    <string name="saveCardBtn">Save Card</string>
+    <string name="apmtServiceType">At Home Service</string>
+    <string name="apmtDate">Select the Date</string>
+    <string name="book_apt_select_date_btn">Select Date</string>
+    <string name="apmtTimeSlotText">Select available time slot</string>
+    <string name="review_service_provider_title">Service Provider:</string>
+    <string name="review_service_type">Service Type:</string>
+    <string name="review_appt_date">Date:</string>
+    <string name="review_appt_time">Time Slot:</string>
+    <string name="review_appt_isAtHome">At Home:</string>
+    <string name="eProfileCity">City</string>
+    <string name="eProfileProvince">Ontario</string>
+    <string name="eProfilePostalCode">Postal Code</string>
+    <string name="review_billingDetails">Billing Details</string>
+    <string name="bill_amount">Amount</string>
+    <string name="bill_hst">HST(13%)</string>
+    <string name="btnConfirmAndPay"><![CDATA[Confirm & Pay]]></string>
+    <string name="upcoming_appointment">Upcoming Appointments</string>
+    <string name="previous_appointment">Previous Appointments</string>
+    <string name="no_prev_pt">No previous appointments!</string>
+    <string name="no_upcoming_pt">No upcoming appointments!</string>
+    <string name="bill_total">Total</string>
+    <string name="rbc_add_or_change_card">Add/Change Card</string>
+    <string name="card_use">Card use</string>
+    <string name="selectDateBefore">Please select the date to view the available time slots.</string>
+    <string name="btnContinue">Continue</string>
+    <string name="rbc_add_or_change_bill_address">Add/change Billing Address</string>
+
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+
+
+    </string-array>
+
+    <string-array name="years">
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+        <item>2026</item>
+        <item>2027</item>
+        <item>2028</item>
+        <item>2029</item>
+        <item>2030</item>
+        <item>2031</item>
+        <item>2032</item>
+        <item>2033</item>
+        <item>2034</item>
+        <item>2035</item>
+        <item>2036</item>
+        <item>2037</item>
+        <item>2038</item>
+        <item>2039</item>
+        <item>2040</item>
+        <item>2041</item>
+        <item>2042</item>
+        <item>2043</item>
+        <item>2044</item>
+        <item>2045</item>
+        <item>2046</item>
+        <item>2047</item>
+        <item>2048</item>
+        <item>2049</item>
+        <item>2050</item>
+
+
+    </string-array>
 </resources>

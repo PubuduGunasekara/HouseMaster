@@ -17,6 +17,27 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_serviceItemFragment"
+            app:destination="@id/serviceItemFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_individualCategorySPListFragment"
+            app:destination="@id/individualCategorySPListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -45,6 +66,10 @@
         <action
             android:id="@+id/action_welcomeFragment_to_homeFragment"
             app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -69,5 +94,403 @@
         android:id="@+id/searchFragment"
         android:name="com.example.housemaster.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_individualCategorySPListFragment"
+            app:destination="@id/individualCategorySPListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.housemaster.SignInFragment"
+        android:label="fragment_signin"
+        tools:layout="@layout/fragment_signin">
+        <action
+            android:id="@+id/action_signInFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_signInFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.housemaster.SignUpFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/action_signUpFragment_to_signUpSuccessFragment"
+            app:destination="@id/signUpSuccessFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.example.housemaster.ResetPasswordFragment"
+        android:label="fragment_resetpassword"
+        tools:layout="@layout/fragment_reset_password">
+        <action
+            android:id="@+id/action_resetPasswordFragment_to_RPDoneFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_resetPasswordFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpSuccessFragment"
+        android:name="com.example.housemaster.SignUpSuccessFragment"
+        android:label="fragment_signup_success"
+        tools:layout="@layout/fragment_signup_success">
+        <action
+            android:id="@+id/action_signUpSuccessFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/RPDoneFragment"
+        android:name="com.example.housemaster.RPDoneFragment"
+        android:label="fragment_rp_done"
+        tools:layout="@layout/fragment_rp_done">
+        <action
+            android:id="@+id/action_RPDoneFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/RPNewPasswordFragment"
+        android:name="com.example.housemaster.RPNewPasswordFragment"
+        android:label="fragment_rp_new_password"
+        tools:layout="@layout/fragment_rp_new_password">
+        <action
+            android:id="@+id/action_RPNewPasswordFragment_to_RPDoneFragment"
+            app:destination="@id/RPDoneFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/serviceItemFragment"
+        android:name="com.example.housemaster.ServiceItemFragment"
+        android:label="Service Item"
+        tools:layout="@layout/fragment_service_item">
+        <action
+            android:id="@+id/action_serviceItemFragment_to_bookAppointmentFragment"
+            app:destination="@id/bookAppointmentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="serviceItemId"
+            app:argType="string" />
+        <argument
+            android:name="serviceCategory"
+            app:argType="string" />
+        <argument
+            android:name="spName"
+            app:argType="string" />
+        <argument
+            android:name="spRatings"
+            app:argType="string" />
+        <argument
+            android:name="spImage"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookAppointmentFragment"
+        android:name="com.example.housemaster.BookAppointmentFragment"
+        android:label="Book Appointment"
+        tools:layout="@layout/fragment_book_appointment">
+        <argument
+            android:name="serviceTypeId"
+            app:argType="string" />
+        <argument
+            android:name="serviceTitle"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_bookAppointmentFragment_to_reviewBeforeConAppFragment"
+            app:destination="@id/reviewBeforeConAppFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/appointmentPayFragment"
+        android:name="com.example.housemaster.AppointmentPayFragment"
+        android:label="fragment_appointment_pay"
+        tools:layout="@layout/fragment_appointment_pay">
+        <action
+            android:id="@+id/action_appointmentPayFragment_to_appointmentSuccessFragment"
+            app:destination="@id/appointmentSuccessFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/appointmentSuccessFragment"
+        android:name="com.example.housemaster.AppointmentSuccessFragment"
+        android:label="fragment_appointment_success"
+        tools:layout="@layout/fragment_appointment_success" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.housemaster.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile">
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileChangePasswordFragment"
+            app:destination="@id/profileChangePasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.housemaster.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileChangePasswordFragment"
+        android:name="com.example.housemaster.ProfileChangePasswordFragment"
+        android:label="Change Password"
+        tools:layout="@layout/fragment_profile_change_password">
+        <action
+            android:id="@+id/action_profileChangePasswordFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_profileChangePasswordFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_signInFragment"
+        app:destination="@id/signInFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <fragment
+        android:id="@+id/addCardsAndAccountsFragment"
+        android:name="com.example.housemaster.AddCardsAndAccountsFragment"
+        android:label="Add Card"
+        tools:layout="@layout/fragment_add_cards_and_accounts">
+        <action
+            android:id="@+id/action_addCardsAndAccountsFragment_to_listCardsFragment"
+            app:destination="@id/listCardsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_addCardsAndAccountsFragment_to_reviewBeforeConAppFragment"
+            app:destination="@id/reviewBeforeConAppFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/listCardsFragment"
+        android:name="com.example.housemaster.ListCardsFragment"
+        android:label="Cards and Accounts"
+        tools:layout="@layout/fragment_list_cards">
+        <action
+            android:id="@+id/action_listCardsFragment_to_addCardsAndAccountsFragment"
+            app:destination="@id/addCardsAndAccountsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <action
+        android:id="@+id/action_global_listCardsFragment"
+        app:destination="@id/listCardsFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <action
+
+        android:id="@+id/action_global_searchFragment"
+        app:destination="@id/searchFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <argument
+        android:name="categoryId"
+        app:argType="string" />
+    <argument
+        android:name="categoryTitle"
+        app:argType="string" />
+    <fragment
+        android:id="@+id/individualCategorySPListFragment"
+        android:name="com.example.housemaster.IndividualCategorySPListFragment"
+        android:label="Category"
+        tools:layout="@layout/fragment_individual_category">
+        <action
+            android:id="@+id/action_individualCategorySPListFragment_to_serviceItemFragment"
+            app:destination="@id/serviceItemFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="categoryId"
+            app:argType="string" />
+        <argument
+            android:name="categoryTitle"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewBeforeConAppFragment"
+        android:name="com.example.housemaster.ReviewBeforeConAppFragment"
+        android:label="Review Appointment "
+        tools:layout="@layout/fragment_review_before_confirm_app">
+        <action
+            android:id="@+id/action_reviewBeforeConAppFragment_to_appointmentPayFragment"
+            app:destination="@id/appointmentPayFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="appTimeSlot"
+            app:argType="string" />
+        <argument
+            android:name="isHomeService"
+            app:argType="boolean" />
+        <argument android:name="appDate" />
+        <argument android:name="appServiceType" />
+        <argument
+            android:name="serviveTypeId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_reviewBeforeConAppFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_reviewBeforeConAppFragment_to_addCardsAndAccountsFragment"
+            app:destination="@id/addCardsAndAccountsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_reviewBeforeConAppFragment_to_addCardsAndAccountsFromRBCFragment"
+            app:destination="@id/addCardsAndAccountsFromRBCFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/appointmentHistoryFragment"
+        android:name="com.example.housemaster.AppointmentHistoryFragment"
+        android:label="fragment_appointment_history"
+        tools:layout="@layout/fragment_appointment_history">
+        <action
+            android:id="@+id/action_appointmentHistoryFragment_to_appointmentItemFragment"
+            app:destination="@id/appointmentItemFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/appointmentItemFragment"
+        android:name="com.example.housemaster.AppointmentItemFragment"
+        android:label="Appointment History"
+        tools:layout="@layout/fragment_appointment_item">
+        <argument
+            android:name="aptId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCardsAndAccountsFromRBCFragment"
+        android:name="com.example.housemaster.AddCardsAndAccountsFromRBCFragment"
+        android:label="fragment_add_cards_and_accounts_from_rbc"
+        tools:layout="@layout/fragment_add_cards_and_accounts_from_rbc">
+        <action
+            android:id="@+id/action_addCardsAndAccountsFromRBCFragment_to_reviewBeforeConAppFragment"
+            app:destination="@id/reviewBeforeConAppFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 </navigation>

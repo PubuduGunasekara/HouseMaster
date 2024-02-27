@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -15,25 +17,29 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.housemaster.databinding.ActivityMainBinding
 import com.example.housemaster.databinding.FragmentWelcomeBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
-
+        //initiate the firebase object
+        firebaseAuth = FirebaseAuth.getInstance()
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         navController = navHostFragment.findNavController()
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment, R.id.searchFragment),
+            setOf(R.id.homeFragment, R.id.searchFragment, R.id.signOut, R.id.listCardsFragment),
             mainBinding.drawerLayout
         )
 
@@ -43,7 +49,45 @@ class MainActivity : AppCompatActivity() {
         mainBinding.bottomNav.setupWithNavController(navController)
         mainBinding.navView.setupWithNavController(navController)
 
+
+       /* mainBinding.navView.setNavigationItemSelectedListener {
+            val id = it.itemId
+
+
+            if (id == R.id.signOut) {
+                MaterialAlertDialogBuilder(this).setTitle("Success")
+                    .setCancelable(false)
+                    .setMessage("You have been signed out successfully.")
+                    .setPositiveButton("Done") { dialog_, which ->
+
+                        firebaseAuth.signOut()
+
+                        mainBinding.drawerLayout.closeDrawers();
+
+                        val action = NavGraphDirections.actionGlobalSignInFragment()
+                        navController.navigate(action)
+
+
+                    }.show()
+            } else if (id == R.id.homeFragment) {
+                val action = NavGraphDirections.actionGlobalHomeFragment()
+                navController.navigate(action)
+
+            } else if (id == R.id.searchFragment) {
+                val action = NavGraphDirections.actionGlobalSearchFragment()
+                navController.navigate(action)
+
+            } else if (id == R.id.listCardsFragment) {
+                val action = NavGraphDirections.actionGlobalListCardsFragment()
+                navController.navigate(action)
+            }
+
+            return@setNavigationItemSelectedListener true
+        }*/
+
+
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.options_menu, menu)
@@ -51,13 +95,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.termsAndConditions) {
-            val action = NavGraphDirections.actionGlobalTermsFragment()
-            navController.navigate(action)
-            true
-        } else {
-            item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
-        }
+        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

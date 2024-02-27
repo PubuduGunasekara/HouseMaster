@@ -2,12 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/termsAndConditions"
-        android:title="Terms &amp; Conditions"
+        android:id="@+id/profileFragment"
+        android:title="Profile"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/settingsFragment"
-        android:menuCategory="secondary"
-        android:title="Settings"
-        app:showAsAction="never" />
+
+
 </menu>
